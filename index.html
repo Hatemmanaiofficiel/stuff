@@ -152,45 +152,6 @@
             background-color: #0056b3;
             transform: scale(1.05);
         }
-        .negotiate-banner {
-            background: #ffffff;
-            padding: 20px;
-            margin: 20px auto;
-            border: 1px solid #dee2e6;
-            border-radius: 8px;
-            max-width: 600px;
-            text-align: left;
-            display: none; /* Initially hidden */
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-        .negotiate-banner h2 {
-            margin: 0 0 15px;
-            font-size: 24px;
-            color: #333;
-        }
-        .negotiate-banner input {
-            width: calc(100% - 22px);
-            padding: 10px;
-            border: 1px solid #ced4da;
-            border-radius: 5px;
-            font-size: 16px;
-            margin-bottom: 15px;
-        }
-        .negotiate-banner button {
-            padding: 10px 15px;
-            background-color: #28a745;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            margin-right: 10px;
-            transition: background 0.3s, transform 0.3s;
-        }
-        .negotiate-banner button:hover {
-            background-color: #218838;
-            transform: scale(1.05);
-        }
         footer {
             text-align: center;
             margin: 20px 0;
@@ -227,14 +188,7 @@
     <h1>Find Your Service</h1>
     <p>See how we can help you today!</p>
     <div class="service-select">
-        <select id="service-dropdown">
-            <option value="" disabled selected>Select a service</option>
-            <option value="plumbing">Plumbing</option>
-            <option value="housekeeping">Housekeeping</option>
-            <option value="gardening">Gardening</option>
-            <option value="electrical">Electrical Work</option>
-        </select>
-        <button onclick="searchService()">Search</button>
+<button onclick="window.location.href='service_selection.html'">Search</button>
     </div>
 </div>
 
@@ -242,25 +196,12 @@
 <div class="provider-details" id="provider-details"></div>
 <div class="actions" id="actions"></div>
 
-<!-- Negotiation Banner -->
-<div class="negotiate-banner" id="negotiate-banner">
-    <h2>Propose a New Price</h2>
-    <input type="number" id="new-price" placeholder="Enter new price" />
-    <button onclick="submitNegotiation()">Submit Proposal</button>
-    <button onclick="cancelNegotiation()">Cancel</button>
-</div>
 
 <footer>
     <p>© 2024 Stuff. All rights reserved.</p>
 </footer>
 
 <script>
-    const providers = {
-        plumbing: { name: "John Doe", price: 100, location: "123 Main St, Cityville", experience: "5 years" },
-        housekeeping: { name: "Jane Smith", price: 80, location: "456 Elm St, Townsville", experience: "3 years" },
-        gardening: { name: "Mike Johnson", price: 90, location: "789 Oak St, Villageburg", experience: "4 years" },
-        electrical: { name: "Emily Davis", price: 120, location: "101 Pine St, Hamlet", experience: "6 years" },
-    };
 
     function toggleLoginOptions() {
         const loginOptions = document.getElementById('login-options');
@@ -276,94 +217,14 @@
         }
     }
 
-    function searchService() {
-        const service = document.getElementById('service-dropdown').value;
-        const messageElement = document.getElementById('message');
-        const providerDetailsElement = document.getElementById('provider-details');
-        const actionsElement = document.getElementById('actions');
-        const negotiateBanner = document.getElementById('negotiate-banner');
-
-        if (service) {
+        {if (service) {
             const provider = providers[service];
-            messageElement.textContent = `Searching for ${service} services...`;
-            providerDetailsElement.innerHTML = `
-                <h2>Provider Details:</h2>
-                <p><strong>Name:</strong> ${provider.name}</p>
-                <p><strong>Price:</strong> $${provider.price}</p>
-                <p><strong>Location:</strong> ${provider.location}</p>
-                <p><strong>Experience:</strong> ${provider.experience}</p>
-            `;
-            actionsElement.innerHTML = `
-                <button onclick="acceptService('${service}')">Accept</button>
-                <button onclick="showNegotiateBanner()">Negotiate</button>
-                <button onclick="researchService('${service}')">Research</button>
-            `;
-            negotiateBanner.style.display = 'none'; // Hide negotiate banner initially
+            window.location.href = `service_selection.html?service=${service}`; // Redirect to loading page with selected service
         } else {
-            alert('Please select a service.');
+            window.location.href = `service_selection.html?service=${service}`;;
         }
     }
 
-    function acceptService(service) {
-        const provider = providers[service];
-        window.location.href = `paiement.html?price=${provider.price}`;
-    }
-
-    function showNegotiateBanner() {
-        document.getElementById('negotiate-banner').style.display = 'block';
-    }
-
-    function submitNegotiation() {
-        const newPriceInput = document.getElementById('new-price');
-        const newPrice = parseFloat(newPriceInput.value);
-        const service = document.getElementById('service-dropdown').value;
-        const provider = providers[service];
-
-        if (newPrice && newPrice > provider.price) {
-            const accepted = confirm(`You proposed a new price of $${newPrice}. Do you want to accept this price?`);
-            if (accepted) {
-                provider.price = newPrice; // Update the provider's price
-                alert(`Price updated to $${newPrice}.`);
-                searchService(); // Refresh the displayed information
-                newPriceInput.value = ''; // Clear the input field
-                document.getElementById('negotiate-banner').style.display = 'none'; // Hide negotiate banner
-            } else {
-                alert(`Negotiation rejected. Price remains at $${provider.price}.`);
-            }
-        } else {
-            alert("Proposed price must be higher than the current price.");
-        }
-    }
-
-    function cancelNegotiation() {
-        document.getElementById('negotiate-banner').style.display = 'none';
-        document.getElementById('new-price').value = ''; // Clear the input field
-    }
-
-    function researchService(service) {
-        const alternativeProvider = {
-            name: "Sarah Connor",
-            price: 110,
-            location: "321 Main St, Cityville",
-            experience: "6 years"
-        };
-        const messageElement = document.getElementById('message');
-        const providerDetailsElement = document.getElementById('provider-details');
-        const actionsElement = document.getElementById('actions');
-
-        messageElement.textContent = `Researching alternatives for ${service}...`;
-        providerDetailsElement.innerHTML = `
-            <h2>Alternative Provider:</h2>
-            <p><strong>Name:</strong> ${alternativeProvider.name}</p>
-            <p><strong>Price:</strong> $${alternativeProvider.price}</p>
-            <p><strong>Location:</strong> ${alternativeProvider.location}</p>
-            <p><strong>Experience:</strong> ${alternativeProvider.experience}</p>
-        `;
-        actionsElement.innerHTML = `
-            <button onclick="acceptService('${service}')">Accept Alternative</button>
-            <button onclick="searchService()">Back</button>
-        `;
-    }
 </script>
 
 </body>
