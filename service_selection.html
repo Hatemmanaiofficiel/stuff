@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Select Your Service</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: #f0f4f8;
+        }
+        .banner {
+            background: linear-gradient(135deg, #ff6f61, #ffcc5c);
+            color: white;
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+            font-size: 28px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .logo {
+            width: 100px;
+            animation: bounce 1s infinite alternate;
+        }
+        @keyframes bounce {
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
+        }
+        .selection-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
+        }
+        select, input[type="number"], button {
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: calc(100% - 22px);
+            transition: border 0.3s, box-shadow 0.3s;
+        }
+        select:focus, input[type="number"]:focus {
+            border-color: #ff6f61;
+            box-shadow: 0 0 5px rgba(255, 111, 97, 0.5);
+        }
+        button {
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #ffcc5c;
+            transform: scale(1.05);
+        }
+    </style>
+</head>
+<body>
+
+<div class="banner">Welcome to Our Service Selection</div>
+
+<div class="selection-container">
+    <h2>Select Your Service</h2>
+    <label for="service-select">Choose a service:</label>
+    <select id="service-select">
+        <option value="plumbing">Plumbing</option>
+        <option value="housekeeping">Housekeeping</option>
+        <option value="gardening">Gardening</option>
+        <option value="electrical">Electrical Work</option>
+    </select>
+    
+    <h2>Select Your Price Range</h2>
+    <label for="price-input">Enter your price:</label>
+    <input type="number" id="price-input" placeholder="Enter your price" />
+
+    <button id="submit-button">Proceed to Loading</button>
+</div>
+
+<script>
+    document.getElementById('submit-button').addEventListener('click', function() {
+        const service = document.getElementById('service-select').value;
+        const price = document.getElementById('price-input').value;
+
+        if (service && price) {
+            window.location.href = `search_results.html?service=${service}&price=${price}`; // Redirect to search results page
+        } else {
+            alert('Please fill in all fields before proceeding.');
+        }
+    });
+</script>
+
+</body>
+</html>

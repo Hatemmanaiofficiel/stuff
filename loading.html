@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loading - Stuff</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            overflow: hidden; /* Prevent scrollbars */
+            background: linear-gradient(135deg, #ff6f61, #ffcc5c);
+            animation: backgroundAnimation 10s infinite alternate;
+        }
+        @keyframes backgroundAnimation {
+            0% { background-color: #ff6f61; }
+            50% { background-color: #ffcc5c; }
+            100% { background-color: #ff6f61; }
+        }
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        .circle-loader {
+            border: 8px solid rgba(255, 255, 255, 0.3);
+            border-top: 8px solid white;
+            border-radius: 50%;
+            width: 80px; /* Increased size for better visibility */
+            height: 80px; /* Increased size for better visibility */
+            animation: spin 1s linear infinite;
+            position: relative; /* Changed to relative for proper positioning */
+            margin-top: 20px; /* Added margin for spacing */
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .cute-shape {
+            width: 30px;
+            height: 30px;
+            position: absolute;
+            border-radius: 50%;
+            background: white; /* Changed to white */
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body>
+
+<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh;">
+    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin-top: 40px;">
+        <h1 id="service-text" style="font-size: 36px; text-align: center; color: white; margin-bottom: 20px;">Searching for your service...</h1>
+        <div class="circle-loader"></div>
+    </div>
+    <p style="font-size: 20px; text-align: center; color: white;">Please wait while we find the best options for you.</p>
+</div>
+
+<script>
+    setTimeout(function() {
+        window.location.href = 'search_results.html'; // Redirect to the service selection page
+    }, 5000); // 5000 milliseconds = 5 seconds
+</script>
+
+</body>
+</html>
