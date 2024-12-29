@@ -3,65 +3,105 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Loading - Stuff</title>
+    <title>Select Your Service</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <style>
         body {
-            overflow: hidden; /* Prevent scrollbars */
-            background: linear-gradient(135deg, #ff6f61, #ffcc5c);
-            animation: backgroundAnimation 10s infinite alternate;
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: #f0f4f8;
         }
-        @keyframes backgroundAnimation {
-            0% { background-color: #ff6f61; }
-            50% { background-color: #ffcc5c; }
-            100% { background-color: #ff6f61; }
+        .banner {
+            background: linear-gradient(135deg, #ff6f61, #ffcc5c);
+            color: white;
+            padding: 20px;
+            width: 100%;
+            text-align: center;
+            font-size: 28px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+        .logo {
+            width: 100px;
+            animation: bounce 1s infinite alternate;
         }
         @keyframes bounce {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            0% { transform: translateY(0); }
+            100% { transform: translateY(-10px); }
         }
-        .circle-loader {
-            border: 8px solid rgba(255, 255, 255, 0.3);
-            border-top: 8px solid white;
-            border-radius: 50%;
-            width: 80px; /* Increased size for better visibility */
-            height: 80px; /* Increased size for better visibility */
-            animation: spin 1s linear infinite;
-            position: relative; /* Changed to relative for proper positioning */
-            margin-top: 20px; /* Added margin for spacing */
+        .selection-container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            max-width: 400px;
+            width: 100%;
         }
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        select, input[type="number"], button {
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            width: calc(100% - 22px);
+            transition: border 0.3s, box-shadow 0.3s;
         }
-        .cute-shape {
-            width: 30px;
-            height: 30px;
-            position: absolute;
-            border-radius: 50%;
-            background: white; /* Changed to white */
-            pointer-events: none;
+        select:focus, input[type="number"]:focus {
+            border-color: #ff6f61;
+            box-shadow: 0 0 5px rgba(255, 111, 97, 0.5);
+        }
+        button {
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #ffcc5c;
+            transform: scale(1.05);
         }
     </style>
 </head>
 <body>
 
-<div style="display: flex; flex-direction: column; justify-content: center; align-items: center; height: 100vh;">
-    <div style="display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin-top: 40px;">
-        <h1 id="service-text" style="font-size: 36px; text-align: center; color: white; margin-bottom: 20px;">Searching for your service...</h1>
-        <div class="circle-loader"></div>
-    </div>
-    <p style="font-size: 20px; text-align: center; color: white;">Please wait while we find the best options for you.</p>
+<div class="banner">Welcome to Our Service Selection</div>
+
+<div class="selection-container">
+    <h2>Select Your Service</h2>
+    <label for="service-select">Choose a service:</label>
+    <select id="service-select">
+        <option value="plumbing">Plumbing</option>
+        <option value="housekeeping">Housekeeping</option>
+        <option value="gardening">Gardening</option>
+        <option value="electrical">Electrical Work</option>
+    </select>
+    
+    <h2>Select Your Price Range</h2>
+    <label for="price-input">Enter your price:</label>
+    <input type="number" id="price-input" placeholder="Enter your price" />
+
+    <button id="submit-button">Proceed to Loading</button>
 </div>
 
 <script>
-    setTimeout(function() {
+    document.getElementById('submit-button').addEventListener('click', function() {
+        const service = document.getElementById('service-select').value;
+        const price = document.getElementById('price-input').value;
+
         if (service && price) {
-            window.location.href = `search_results.html?service=${service}&price=${price}`; // Redirect to search results page
+            window.location.href = `loading.html?service=${service}&price=${price}`; // Redirect to search results page
         } else {
-            alert('Go back and select a service and price');
+            alert('Please fill in all fields before proceeding.');
         }
-    }, 5000); // 5000 milliseconds = 5 seconds
+    });
 </script>
 
 </body>
