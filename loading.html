@@ -55,13 +55,17 @@
 </div>
 
 <script>
+    const params = new URLSearchParams(window.location.search);
+    const service = params.get('service');
+    const price = params.get('price');
+
     setTimeout(function() {
         if (service && price) {
             window.location.href = `search_results.html?service=${service}&price=${price}`; // Redirect to search results page
         } else {
             alert('Go back and select a service and price');
         }
-    }, 5000); // 5000 milliseconds = 5 seconds
+    }, 3000); // Reduced loading time to 3 seconds
 </script>
 
 </body>
