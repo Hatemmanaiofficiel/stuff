@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Price Proposal</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: #f0f4f8; /* Soft background color for contrast */
+            font-family: 'Roboto', sans-serif;
+            color: #333;
+        }
+
+        .navbar {
+            background-color: #ffffff;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #e0e0e0;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar .logo {
+            color: #ffcc00;
+            font-weight: bold;
+            font-size: 36px;
+            letter-spacing: 1px;
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .navbar a {
+            color: #333;
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .navbar a:hover {
+            background-color: #ffcc00;
+            color: white;
+        }
+
+        .content {
+            padding: 40px;
+            text-align: center;
+            max-width: 600px; 
+            margin: 40px auto; 
+            background: white; 
+            border-radius: 10px; 
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .title {
+            font-size: 30px;
+            margin-bottom: 20px;
+            font-weight: 700;
+            color: #000000; /* Accent color for titles */
+        }
+
+        .worker-info {
+            margin: 20px 0;
+            font-size: 18px;
+            text-align: left;
+            padding: 20px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            background: #f9f9f9; 
+        }
+
+        .price-section {
+            margin: 20px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .price {
+            font-size: 24px;
+            color: #28a745; 
+            font-weight: bold;
+        }
+
+        .button-container {
+            margin-top: 30px;
+            display: flex;
+            justify-content: space-between; 
+            align-items: center; 
+        }
+
+        .negotiation {
+            margin-top: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .negotiate-button, .submit-button, .search-button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            flex: 1; /* Equal width for buttons */
+            margin: 0 5px; /* Equal spacing between buttons */
+        }
+
+        .negotiate-button:hover, .submit-button:hover, .search-button:hover {
+            background-color: #0056b3;
+            transform: translateY(-2px); 
+        }
+
+        .input-negotiation {
+            display: none; /* Hidden by default */
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 16px;
+            width: 100%;
+            margin-top: 10px;
+            transition: border-color 0.3s;
+        }
+
+        .input-negotiation:focus {
+            border-color: #ffcc00;
+            outline: none;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #ffffff;
+            border-top: 2px solid #e0e0e0;
+            margin-top: 40px;
+            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer .logo {
+            font-size: 24px;
+            color: #ffcc00;
+        }
+
+        .footer .copyright {
+            font-size: 14px;
+            color: #555;
+        }
+
+        @media (max-width: 600px) {
+            .navbar .nav-links {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .content {
+                padding: 20px;
+            }
+
+            .button-container {
+                flex-direction: column; 
+            }
+
+            .negotiation {
+                flex-direction: column; /* Stack on small screens */
+            }
+
+            .negotiate-button, .submit-button, .search-button {
+                margin: 5px 0; /* Stack buttons */
+            }
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo">STUFF</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="about.html">About Us</a>
+            <a href="#signin">Sign In</a>
+        </div>
+    </div>
+
+    <div class="content">
+        <h1 class="title">Price Proposal</h1>
+        
+        <div class="worker-info">
+            <h2>Service: <span id="selected-service"></span></h2>
+            <p>Name: <span id="worker-name"></span></p>
+            <p>Profession: <span id="worker-profession"></span></p>
+            <div class="price-section">
+                <span class="price" id="proposed-price">$100</span> 
+            </div>
+        </div>
+
+        <div class="button-container">
+            <a href="payment.html"
+                ><button class="submit-button" onclick="submitProposal()">Submit Proposal</button>
+            </a>
+            <button class="negotiate-button" onclick="toggleNegotiationInput()">Negotiate</button>
+            <button class="search-button" onclick="searchNewWorker()">Search for other's</button>
+        </div>
+        
+        <input type="text" class="input-negotiation" id="negotiation-input" placeholder="Enter your proposed price">
+    </div>
+
+    <div class="footer">
+        <div class="logo">STUFF</div>
+        <div class="copyright">© 2025 All Rights Reserved</div>
+    </div>
+
+    <script>
+        const workerData = {
+            "Plumbing": { name: "John Doe", profession: "Plumber" },
+            "Housekeeping": { name: "Jane Smith", profession: "Housekeeper" },
+            "Gardening": { name: "Mark Green", profession: "Gardener" },
+            "Electrical Work": { name: "Emily White", profession: "Electrician" }
+        };
+
+        const selectedService = localStorage.getItem('selectedService');
+        if (selectedService) {
+            document.getElementById('selected-service').innerText = selectedService;
+
+            const worker = workerData[selectedService];
+            if (worker) {
+                document.getElementById('worker-name').innerText = worker.name;
+                document.getElementById('worker-profession').innerText = worker.profession;
+            } else {
+                document.getElementById('worker-name').innerText = "Worker not found.";
+                document.getElementById('worker-profession').innerText = "";
+            }
+        } else {
+            document.getElementById('selected-service').innerText = "No service selected.";
+            document.getElementById('worker-name').innerText = "N/A";
+            document.getElementById('worker-profession').innerText = "N/A";
+        }
+
+        function toggleNegotiationInput() {
+            const input = document.getElementById('negotiation-input');
+            input.style.display = input.style.display === 'none' || input.style.display === '' ? 'block' : 'none';
+            input.focus(); // Focus the input when shown
+        }
+
+        function submitProposal() {
+            const proposedPrice = document.querySelector('.input-negotiation').value;
+            alert('Your proposed price: $' + proposedPrice);
+            // Here you would typically send this data to a server
+        }
+
+        function searchNewWorker() {
+            window.location.href = 'service_selection.html';
+        }
+    </script>
+</body>
+</html>

@@ -5,30 +5,45 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Worker Registration - Stuff</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+New:wght@400&display=swap" rel="stylesheet"> <!-- Added Courier New -->
     <style>
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
-            padding: 0;
-            background: #f0f4f8;
+            background-color: #f9f9f9;
+        }
+        .navbar {
+            background-color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ddd;
+        }
+        .navbar .logo {
+            color: rgb(255, 215, 0);
+            font-weight: bold;
+            font-size: 48px;
+            margin-left: 20px;
+        }
+        .navbar .nav-links {
+            margin-right: 20px;
+        }
+        .navbar a {
+            color: black;
+            text-decoration: none; /* Remove underline */
+            margin-right: 20px; /* Space between links */
+            transition: border-color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: rgb(255, 215, 0); /* Change color on hover */
+    border-bottom: 2px solid rgb(255, 215, 0); 
         }
         header {
-            background: linear-gradient(135deg, #ff6f61, #ffcc5c);
-            padding: 20px;
             text-align: center;
-            color: white;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-        .logo-container {
-            display: inline-block;
-            border: 2px solid white;
-            padding: 10px 20px;
-            border-radius: 5px;
-        }
-        .logo {
-            font-size: 64px;
-            font-weight: bold;
-            color: white;
+            padding: 20px;
+            color: black;
         }
         .form-container {
             max-width: 600px;
@@ -42,13 +57,19 @@
             text-align: center;
             margin-bottom: 20px;
         }
-        .form-container input, .form-container select {
+        .form-container input,
+        .form-container select,
+        .form-container textarea {
             width: 100%;
             padding: 10px;
             margin: 10px 0;
             border: 1px solid #ced4da;
             border-radius: 5px;
             font-size: 16px;
+            box-sizing: border-box;
+        }
+        .form-container textarea {
+            font-family: 'Roboto', sans-serif; /* Correct font for textarea */
         }
         .form-container button {
             padding: 10px 15px;
@@ -79,11 +100,16 @@
 </head>
 <body>
 
-<header>
-    <div class="logo-container">
-        <div class="logo">Stuff</div>
+<div class="navbar">
+    <div class="logo">STUFF</div>
+    <div class="nav-links">
+        <a href="about.html">About Us</a>
+        <a href="index.html">Home</a>
     </div>
-    <p>Register as a Worker!</p>
+</div>
+
+<header>
+    <h1>Register as a Worker!</h1>
 </header>
 
 <div class="form-container">
@@ -91,53 +117,38 @@
     <form id="worker-form">
         <input type="text" id="first-name" placeholder="First Name" required>
         <input type="text" id="last-name" placeholder="Last Name" required>
-        <input type="text" id="location" placeholder="Location" required>
-        <select id="service" required>
-            <option value="" disabled selected>Select a Service Offered</option>
-            <option value="gardening">Gardening</option>
-            <option value="electrical">Electrical Work</option>
-            <option value="housekeeping">Housekeeping</option>
-            <option value="plumbing">Plumbing</option>
+        <input type="email" id="email" placeholder="Email Address" required>
+
+        <label for="role">Select Your Role:</label>
+        <select id="role" required>
+            <option value="" disabled selected>Select a role</option>
+            <option value="plumber">Plumber</option>
+            <option value="electrician">Electrician</option>
+            <option value="gardener">Gardener</option>
+            <option value="housekeeper">Housekeeper</option>
         </select>
-        <input type="number" id="price" placeholder="Price ($)" required>
-        <input type="text" id="experience" placeholder="Experience or Diploma" required>
+
+        <label for="certification">Attach Certification File:</label>
+        <input type="file" id="certification" accept=".pdf,.doc,.docx,image/*" required>
+
+        <label for="experience">Previous Experience:</label>
+        <textarea id="experience" placeholder="Describe your previous experience" rows="4" required></textarea>
+
         <button type="submit">Submit</button>
         <div class="error-message" id="error-message"></div>
     </form>
 </div>
 
 <footer>
-    <p>© 2024 Stuff. All rights reserved.</p>
+    <p>© 2025 Stuff. All rights reserved.</p>
 </footer>
 
 <script>
     document.getElementById('worker-form').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent default form submission
-
-        // Gather form data
-        const workerData = {
-            firstName: document.getElementById('first-name').value,
-            lastName: document.getElementById('last-name').value,
-            location: document.getElementById('location').value,
-            service: document.getElementById('service').value,
-            price: document.getElementById('price').value,
-            experience: document.getElementById('experience').value
-        };
-
-        // Check if all fields are filled
-        if (Object.values(workerData).some(field => !field)) {
-            document.getElementById('error-message').textContent = "Please fill in all fields.";
-            return;
-        }
-
-        // Get existing workers from local storage
-        const workers = JSON.parse(localStorage.getItem('workers')) || [];
-        workers.push(workerData); // Add new worker
-        localStorage.setItem('workers', JSON.stringify(workers)); // Save back to local storage
-
-        // Optionally, redirect back to stuff.html
-        alert(`Worker registered: ${workerData.firstName} ${workerData.lastName}`);
-        window.location.href = 'stuff.html'; // Redirect to stuff.html
+        event.preventDefault(); // Prevent the default form submission
+        
+        // Additional validation can be added here
+        window.location.href = 'index.html'; // Redirect to index.html
     });
 </script>
 

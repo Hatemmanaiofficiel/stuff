@@ -3,229 +3,355 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stuff - Find Your Service</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>Main Page</title>
     <style>
         body {
-            font-family: 'Roboto', sans-serif;
             margin: 0;
-            padding: 0;
-            background: #f0f4f8;
+            background-color: #f9f9f9;
+            font-family: 'Roboto', sans-serif;
         }
-        header {
-            background: linear-gradient(135deg, #ff6f61, #ffcc5c);
-            padding: 20px;
-            text-align: center;
-            color: white;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            animation: fadeIn 1s ease-in;
-        }
-        .logo-container {
-            display: inline-block;
-            border: 2px solid white;
-            padding: 10px 20px;
-            border-radius: 5px;
-        }
-        .logo {
-            font-size: 64px;
-            font-weight: bold;
-            color: white;
-        }
-        .login-button {
-            padding: 10px 15px;
-            margin-top: 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            background-color: #ffffff;
-            color: #ff6f61;
-            transition: background 0.3s, transform 0.3s;
-        }
-        .login-button:hover {
-            background-color: #f1f1f1;
-            transform: scale(1.05);
-        }
-        .banner {
-            background: linear-gradient(135deg, #ff6f61, #ffcc5c);
-            padding: 60px 20px;
-            text-align: center;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            margin: 20px auto;
-            max-width: 600px;
-            animation: slideIn 1s ease-in-out;
-        }
-        .banner h1 {
-            color: white;
-            font-size: 36px;
-            margin-bottom: 10px;
-        }
-        .banner p {
-            color: #fff;
-            font-size: 18px;
-            margin-bottom: 30px;
-        }
-        .service-select {
+
+        .navbar {
+            background-color: white;
+            padding: 15px;
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            margin: 20px 0;
+            border-bottom: 2px solid #ddd;
         }
-        .service-select select {
+
+        .navbar .logo {
+            color: rgb(255, 215, 0);
+            font-weight: bold;
+            font-size: 48px;
+            margin-left: 20px;
+        }
+
+        .navbar .nav-links {
+            margin-right: 20px;
+            font-size: 16px;
+        }
+
+        .navbar a {
+            color: black;
+            text-decoration: none;
+            margin-right: 20px;
+            transition: color 0.3s;
+        }
+
+        .navbar a:hover {
+            color: rgb(255, 215, 0);
+        }
+
+        .content {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .tagline {
+            font-size: 36px;
+            margin: 20px 0;
+            color: #333;
+        }
+
+        .button {
+            background-color: green;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            margin-top: 30px;
+            transition: background-color 0.3s;
+        }
+
+        .button:hover {
+            background-color: darkgreen;
+        }
+
+        .yellow-section {
+            background-color: rgb(255, 215, 0);
+            padding: 40px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 40px;
+        }
+
+        .yellow-section img {
+            max-width: 300px;
+            height: auto;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+        }
+
+        .description {
+            max-width: 500px;
+            text-align: left;
+            font-size: 1.5rem; 
+        }
+
+        .community-text {
+            text-align: center;
+            padding: 40px;
+            font-size: 18px;
+            color: black;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .feedback-section {
+            background-color: #f4f4f4;
+            padding: 40px 20px;
+            text-align: center;
+            border-top: 2px solid #ddd;
+        }
+
+        .feedback-section h2 {
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+
+        .feedback-section p {
+            font-size: 18px;
+            margin-bottom: 20px;
+            color: #555;
+        }
+
+        .editable-field {
             padding: 10px;
             border: none;
             border-radius: 5px;
             font-size: 16px;
-            margin-right: 10px;
-            cursor: pointer;
-            transition: transform 0.3s;
+            width: 100%;
+            min-height: 40px;
+            margin-bottom: 10px;
+            cursor: text;
+            position: relative;
+            outline: none;
+            background-color: transparent;
         }
-        .service-select button {
-            padding: 10px 20px;
-            background-color: #3B8C57;
+
+        .editable-field:empty:before {
+            content: attr(data-placeholder);
+            color: #aaa;
+            font-style: italic;
+        }
+
+        .feedback-form button {
+            background-color: green;
             color: white;
             border: none;
-            border-radius: 5px;
-            font-size: 16px;
+            border-radius: 10px;
+            padding: 10px;
+            font-size: 18px;
             cursor: pointer;
-            transition: background 0.3s, transform 0.3s;
+            transition: background-color 0.3s;
         }
-        .service-select button:hover {
-            background-color: #2e7d32;
-            transform: scale(1.05);
+
+        .feedback-form button:hover {
+            background-color: darkgreen;
         }
-        .message {
+
+        .feedback-thank-you {
+            display: none;
+            margin-top: 20px; 
+            font-size: 18px; 
+            color: green;
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .sign-in-banner {
+            display: none;
+            background-color: rgb(255, 215, 0);
+            padding: 10px;
+            margin-top: 10px;
             text-align: center;
-            font-size: 20px;
-            color: #333;
-            margin: 20px 0;
-        }
-        .provider-details {
-            text-align: center;
-            font-size: 20px;
-            color: #333;
-            margin: 20px 0;
-        }
-        .actions {
-            text-align: center;
-            margin: 20px 0;
-        }
-        .actions button {
-            padding: 10px 15px;
-            background-color: #007BFF;
-            color: white;
-            border: none;
             border-radius: 5px;
-            font-size: 16px;
-            cursor: pointer;
-            margin: 0 10px;
-            transition: background 0.3s, transform 0.3s;
         }
-        .actions button:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
-        }
-        .login-options {
-            background: #ffffff;
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
             padding: 20px;
-            margin: 20px auto;
-            border: 1px solid #dee2e6;
+            background-color: #f4f4f4;
+            border-top: 2px solid #ddd;
+        }
+
+        .footer .logo {
+            font-size: 24px;
+            color: rgb(255, 215, 0);
+        }
+        .footer a {
+            color: black;
+            text-decoration: none;
+            margin-right: 20px;
+            transition: color 0.3s;
+        }
+
+        .footer a:hover {
+            color: rgb(255, 215, 0);
+        }
+        .footer .links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer .links span {
+            cursor: pointer;
+            color: black;
+            font-size: 16px;
+        }
+        .nav-links a {
+    color: black;
+    text-decoration: none;
+    margin-right: 20px;
+    font-size: 16px;
+    transition: color 0.3s; /* Smooth transition */
+}
+.footer .links span {
+    cursor: pointer;
+    color: black;
+    font-size: 16px;
+    transition: color 0.3s; /* Smooth transition */
+}
+
+.footer .links span:hover {
+    color: rgb(255, 215, 0); /* Change color on hover */
+}
+        .footer .copyright {
+            font-size: 14px;
+            color: #555; 
+        }
+
+        .worker-info {
+            margin-top: 40px;
+            font-size: 20px;
+            text-align: left;
+            background: white;
+            padding: 20px;
             border-radius: 8px;
-            max-width: 300px;
-            text-align: center;
-            display: none; /* Initially hidden */
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
         }
-        .login-options button {
-            margin: 10px 0;
-            padding: 10px 15px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-            background-color: #007BFF;
-            color: white;
-            transition: background 0.3s, transform 0.3s;
-        }
-        .login-options button:hover {
-            background-color: #0056b3;
-            transform: scale(1.05);
-        }
-        footer {
-            text-align: center;
-            margin: 20px 0;
-            color: #888;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-        @keyframes slideIn {
-            from { transform: translateY(-20px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-
-<header>
-    <div class="logo-container">
-        <div class="logo">Stuff</div>
+    <div class="navbar">
+        <div class="logo">STUFF</div>
+        <div class="nav-links">
+            <a href="about.html">About Us</a>
+            <a href="#" onclick="toggleBanner()">Sign In</a>
+            <div class="sign-in-banner" id="serviceBanner">
+                <a href="client.html" style="color: black; text-decoration: none;">Client</a> | 
+                <a href="worker.html" style="color: black; text-decoration: none;">Worker</a>
+            </div>
+        </div>
     </div>
-    <p>Your one-stop solution for reliable services!</p>
-    <button class="login-button" onclick="toggleLoginOptions()">Log In</button>
-</header>
 
-<div class="login-options" id="login-options">
-    <h2>Log In As:</h2>
-    <button onclick="window.location.href='client.html'">Client</button>
-    <button onclick="window.location.href='worker.html'">Worker</button>
-</div>
+    <div class="content">
+        <div class="tagline">One-stop solution for users looking for reliable services</div>
+        <a href="service_selection.html">
+            <button class="button">Find Your Service</button>
+        </a>
 
-<div class="banner">
-    <h1>Find Your Service</h1>
-    <p>See how we can help you today!</p>
-    <div class="service-select">
-<button onclick="window.location.href='service_selection.html'">Search</button>
     </div>
-</div>
 
-<div class="message" id="message"></div>
-<div class="provider-details" id="provider-details"></div>
-<div class="actions" id="actions"></div>
+    <div class="yellow-section">
+        <img src="images/plumbing-tools.png" alt="Plumbing Tools">
+        <div class="description">
+            <p>"Stuff" is a service-oriented platform that connects clients with reliable service providers. It facilitates user registration for both clients and workers, allowing clients to easily search for services like gardening, plumbing, and housekeeping. The platform includes a secure payment system, ensuring a smooth transaction process. With a user-friendly design, "Stuff" aims to provide a seamless experience for anyone seeking or offering services.</p>
+        </div>
+    </div>
 
+    <div class="community-text">
+        <p>"Stuff" fosters a sense of community by connecting local service providers with clients in their area, promoting economic growth and collaboration. The platform is dedicated to upholding high standards in service delivery, believing that quality is essential to user satisfaction. Moreover, "Stuff" prioritizes an intuitive and user-friendly design, ensuring that navigation is seamless and enjoyable. This commitment to user experience reflects "Stuff's" belief in making reliable services readily available to everyone, ultimately aiming to enhance the lives of both clients and service providers.</p>
+    </div>
 
-<footer>
-    <p>© 2024 Stuff. All rights reserved.</p>
-</footer>
+    <div class="feedback-section">
+        <h2>We Value Your Feedback</h2>
+        <p>Your feedback helps us improve our services and provide you with the best experience possible. Please share your thoughts below!</p>
+        <form class="feedback-form">
+            <div class="editable-field" contenteditable="true" data-placeholder="Your Name"></div>
+            <div class="editable-field" contenteditable="true" data-placeholder="Your Email"></div>
+            <div class="editable-field" contenteditable="true" data-placeholder="Your Feedback"></div>
+            <div class="button-container">
+                <button type="submit">Submit Feedback</button>
+            </div>
+        </form>
+        <div class="feedback-thank-you">
+            Thank you for your feedback! We appreciate your input.
+        </div>
+    </div>
 
-<script>
+    <div class="footer">
+        <div class="logo">STUFF</div>
+        <div class="links">
+            <span>About Us</span>
+            <span>More Services</span>
+            <a href="contact.html">Contact Us</a>
+        </div>
+        <div class="copyright">© 2025 All Rights Reserved</div>
+    </div>
 
-    function toggleLoginOptions() {
-        const loginOptions = document.getElementById('login-options');
-        loginOptions.style.display = (loginOptions.style.display === 'block') ? 'none' : 'block';
-    }
+    <script>
+        document.querySelector('.feedback-form').addEventListener('submit', function(event) {
+            event.preventDefault(); // Prevent the default form submission
 
-    function login(role) {
-        if (role === 'worker') {
-            window.location.href = 'worker.html'; // Redirect to worker.html
-        } else {
-            alert(`Logging in as ${role.charAt(0).toUpperCase() + role.slice(1)}...`);
-            // Handle client login logic here
+            // Get content from editable fields
+            const name = this.children[0].innerText.trim();
+            const email = this.children[1].innerText.trim();
+            const feedback = this.children[2].innerText.trim();
+
+            if (name && email && feedback) {
+                // Display thank you message
+                document.querySelector('.feedback-thank-you').style.display = 'block';
+                // Clear editable fields
+                Array.from(this.children).forEach(field => field.innerText = '');
+            } else {
+                alert("Please fill in all fields.");
+            }
+        });
+
+        function toggleBanner() {
+            const banner = document.getElementById('serviceBanner');
+            banner.style.display = banner.style.display === 'none' ? 'block' : 'none';
         }
-    }
 
-        {if (service) {
-            const provider = providers[service];
-            window.location.href = `service_selection.html?service=${service}`; // Redirect to loading page with selected service
-        } else {
-            window.location.href = `service_selection.html?service=${service}`;;
+        // Retrieve and display selected service and worker info
+        const selectedService = localStorage.getItem('selectedService');
+        const workerData = {
+            "Plumbing": { name: "John Doe", profession: "Plumber", rating: 4.5 },
+            "Housekeeping": { name: "Jane Smith", profession: "Housekeeper", rating: 4.8 },
+            "Gardening": { name: "Mark Green", profession: "Gardener", rating: 4.2 },
+            "Electrical Work": { name: "Emily White", profession: "Electrician", rating: 4.7 }
+        };
+
+        if (selectedService) {
+            const worker = workerData[selectedService];
+            if (worker) {
+                document.getElementById('selected-service').innerText = selectedService;
+                document.getElementById('worker-name').innerText = worker.name;
+                document.getElementById('worker-profession').innerText = worker.profession;
+                document.getElementById('worker-rating').innerHTML = 'Rating: ' + displayStars(worker.rating);
+                document.getElementById('worker-info').style.display = 'block'; // Show the worker info section
+            }
         }
-    }
 
-</script>
-
+        function displayStars(rating) {
+            let stars = '';
+            for (let i = 1; i <= 5; i++) {
+                stars += i <= Math.floor(rating) ? '★' : '☆';
+            }
+            return stars;
+        }
+    </script>
 </body>
 </html>

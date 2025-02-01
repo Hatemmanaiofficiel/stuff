@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Searching for Workers</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: white; /* Light background for a clean look */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh; /* Full height of the viewport */
+            font-family: 'Roboto', sans-serif;
+            overflow: hidden; /* Prevent scrolling */
+        }
+
+        .dots {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .dot {
+            width: 8px;
+            height: 8px;
+            margin: 0 2px;
+            border-radius: 50%;
+            background-color: white; /* Initial color */
+            animation: colorChange 1s infinite; /* Animation */
+        }
+
+        @keyframes colorChange {
+            0%, 100% {
+                background-color: white;
+            }
+            50% {
+                background-color: gray;
+            }
+        }
+
+        .dot:nth-child(2) {
+            animation-delay: 0.2s; /* Delay for the second dot */
+        }
+
+        .dot:nth-child(3) {
+            animation-delay: 0.4s; /* Delay for the third dot */
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="dots">
+        <div class="dot"></div>
+        <div class="dot"></div>
+        <div class="dot"></div>
+    </div>
+
+    <script>
+        // Redirect after 3 seconds
+        setTimeout(() => {
+            document.body.style.opacity = '0'; // Fade out effect
+            setTimeout(() => {
+                window.location.href = 'price_proposition.html'; // Redirect to the price proposal page
+            }, 500); // Delay for the fade out effect
+        }, 3000); // 3 seconds delay
+    </script>
+</body>
+</html>

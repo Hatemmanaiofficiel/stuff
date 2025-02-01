@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - Stuff</title>
+    <style>
+        body {
+            margin: 0;
+            background-color: white;
+            font-family: 'Roboto', sans-serif;
+        }
+
+        .navbar {
+            background-color: white;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ddd;
+        }
+
+        .navbar .logo {
+            color: rgb(255, 215, 0);
+            font-weight: bold;
+            font-family: 'Helvetica', sans-serif;
+            font-size: 48px;
+            margin-left: 20px;
+            cursor: pointer; /* Change cursor to pointer */
+        }
+
+        .navbar .nav-links {
+            margin-right: 20px;
+        }
+
+        .navbar a {
+            color: black;
+            text-decoration: none; /* Remove underline */
+            margin-right: 20px; /* Space between links */
+            transition: border-color 0.3s;
+        }
+
+        .navbar a:hover {
+            cursor: pointer;
+            color: rgb(255, 215, 0); /* Change color on hover */
+        }
+
+        .content {
+            padding: 40px;
+            text-align: center;
+        }
+
+        .title {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        .section {
+            margin: 40px 0;
+            text-align: left;
+            max-width: 800px;
+            margin: 0 auto; /* Center the section */
+        }
+
+        .section h2 {
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: rgb(255, 215, 0);
+        }
+
+        .section p {
+            font-size: 18px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .team-section {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .team-member {
+            background-color: #f4f4f4;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            width: 200px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-member img {
+            width: 100%;
+            margin-bottom: 10px;
+        }
+
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-top: 2px solid #ddd;
+            margin-top: 40px;
+        }
+
+        .footer .logo {
+            font-size: 24px;
+            color: rgb(255, 215, 0);
+        }
+
+        .footer .links {
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer .links span {
+            cursor: pointer;
+            color: black;
+            font-size: 16px;
+        }
+        .nav-links a {
+    color: black;
+    text-decoration: none;
+    margin-right: 20px;
+    font-size: 16px;
+    transition: color 0.3s; /* Smooth transition */
+}
+
+.nav-links a:hover {
+    color: rgb(255, 215, 0); /* Change color on hover */
+}
+
+.footer .links span {
+    cursor: pointer;
+    color: black;
+    font-size: 16px;
+    transition: color 0.3s; /* Smooth transition */
+}
+
+.footer .links span:hover {
+    color: rgb(255, 215, 0); /* Change color on hover */
+}
+        .footer .copyright {
+            font-size: 14px;
+            color: #555; /* Slightly darker gray for copyright */
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="navbar">
+        <div class="logo" onclick="location.href='index.html'">STUFF</div> <!-- Link to home -->
+        <div class="nav-links">
+            <a href="index.html">Home</a> <!-- Link to Home -->
+            <a href="signin.html">Sign In</a> <!-- Link to Sign In -->
+        </div>
+    </div>
+
+    <div class="content">
+        <h1 class="title">About Us</h1>
+
+        <div class="section">
+            <h2>Our Mission</h2>
+            <p>At Stuff, our mission is to provide a seamless platform that connects clients with reliable service providers. We aim to simplify the process of finding and hiring services in your local area.</p>
+        </div>
+
+        <div class="section">
+            <h2>Our Values</h2>
+            <p>We believe in integrity, quality, and community. Our commitment to high standards ensures that users can trust the services they receive.</p>
+        </div>
+
+        <div class="section">
+            <h2>Meet Our Team</h2>
+            <div class="team-section">
+                <div class="team-member">
+                    <img src="images/ceo.png" alt="Team Member">
+                    <h3>Hatem Manai</h3>
+                    <p>Founder & CEO</p>
+                </div>
+                <div class="team-member">
+                    <img src="images/team-member2.jpg" alt="Team Member 2">
+                    <h3>Not available for now</h3>
+                    <p>Operations Manager</p>
+                </div>
+                <div class="team-member">
+                    <img src="images/team-member3.jpg" alt="Team Member 3">
+                    <h3>Not available for now</h3>
+                    <p>Marketing Specialist</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="logo">STUFF</div>
+        <div class="links">
+            <span>About Us</span>
+            <span>More Services</span>
+            <span>Contact Us</span>
+        </div>
+        <div class="copyright">© 2025 All Rights Reserved</div>
+    </div>
+</body>
+</html>
