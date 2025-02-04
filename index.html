@@ -63,11 +63,6 @@
             align-items: center;
         }
 
-        .grid {
-            display: grid;
-            gap: 20px;
-        }
-
         .text-center {
             text-align: center;
         }
@@ -84,42 +79,104 @@
             top: 0;
             z-index: 1000;
             transition: var(--transition);
+            padding: 15px 0;
         }
 
         body.dark-mode .navbar {
             background-color: var(--background-dark);
         }
 
-        .navbar .logo {
+        .navbar-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+        }
+
+        .logo {
             font-size: 40px;
             font-weight: bold;
             color: var(--primary-color);
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .menu-toggle {
+            font-size: 24px;
+            color: var(--text-light);
+            z-index: 1001;
             cursor: pointer;
         }
 
-        .navbar .nav-links {
-            display: flex;
-            gap: 20px;
-            align-items: center;
-        }
-
-        .navbar a {
-            font-weight: 500;
-            transition: var(--transition);
-        }
-
-        .navbar a:hover {
-            color: var(--primary-color);
+        body.dark-mode .menu-toggle {
+            color: var(--text-dark);
         }
 
         .theme-toggle {
             font-size: 20px;
             color: inherit;
             transition: var(--transition);
+            cursor: pointer;
         }
 
         .theme-toggle:hover {
             color: var(--primary-color);
+        }
+
+        /* Hamburger Menu */
+        .hamburger-menu {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 280px;
+            height: 100%;
+            background-color: var(--background-light);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            z-index: 999;
+            padding: 80px 20px 20px;
+        }
+
+        body.dark-mode .hamburger-menu {
+            background-color: var(--background-dark);
+        }
+
+        .hamburger-menu.active {
+            left: 0;
+        }
+
+        .menu-links {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 10px;
+        }
+
+        .menu-links a {
+            padding: 12px 15px;
+            border-radius: var(--border-radius);
+            transition: var(--transition);
+        }
+
+        .menu-links a:hover {
+            background-color: rgba(255, 215, 0, 0.1);
+        }
+
+        /* Overlay */
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 998;
+            display: none;
+        }
+
+        .overlay.active {
+            display: block;
         }
 
         /* Hero Section */
@@ -152,15 +209,6 @@
         .hero .button:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 16px rgba(255, 215, 0, 0.2);
-        }
-
-        .sign-in-banner {
-            display: none;
-            background-color: rgb(255, 215, 0);
-            padding: 10px;
-            margin-top: 10px;
-            text-align: center;
-            border-radius: 5px;
         }
 
         /* Features Section */
@@ -320,22 +368,22 @@
         }
 
         /* Responsive Design */
+        @media (min-width: 769px) {
+            .menu-toggle,
+            .hamburger-menu {
+                display: none;
+            }
+        }
+
         @media (max-width: 768px) {
-            .navbar .nav-links {
-                gap: 15px;
+            .navbar .desktop-links {
+                display: none;
             }
 
-            .hero .tagline {
-                font-size: 28px;
-            }
-
-            .features .grid {
-                grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            }
-
-            .feedback-form input,
-            .feedback-form textarea {
-                font-size: 14px;
+            .logo {
+                position: static;
+                transform: none;
+                margin: 0 auto;
             }
         }
     </style>
@@ -343,22 +391,29 @@
 <body>
     <!-- Navbar -->
     <nav class="navbar">
-        <div class="container flex">
-            <div class="logo" onclick="location.href='index.html'">STUFF</div>
-            <div class="nav-links">
-                <a href="about.html">About</a>
-                <a href="contact.html">Contact</a>
-                <a href="#" onclick="toggleBanner()">Sign</a>
-                <div class="sign-in-banner" id="serviceBanner">
-                    <a href="client.html" style="color: black; text-decoration: none;">Client</a> | 
-                    <a href="worker.html" style="color: black; text-decoration: none;">Worker</a>
-                </div>
-                <button class="theme-toggle" onclick="toggleTheme()">
-                    <i class="fas fa-moon"></i>
-                </button>
-            </div>
+        <div class="container navbar-content">
+            <button class="menu-toggle" onclick="toggleMenu()">
+                <i class="fas fa-bars"></i>
+            </button>
+            <div class="logo">STUFF</div>
+            <button class="theme-toggle" onclick="toggleTheme()">
+                <i class="fas fa-moon"></i>
+            </button>
         </div>
     </nav>
+
+    <!-- Hamburger Menu -->
+    <div class="hamburger-menu">
+        <nav class="menu-links">
+            <a href="services.html">Services</a>
+            <a href="contact.html">Contact</a>
+            <a href="client.html">Client Sign In</a>
+            <a href="worker.html">Worker Sign In</a>
+            <a href="about.html">About</a>
+            </div>
+        </nav>
+    </div>
+    <div class="overlay" onclick="toggleMenu()"></div>
 
     <!-- Hero Section -->
     <section class="hero section-padding">
@@ -425,6 +480,14 @@
     </footer>
 
     <script>
+        // Toggle Hamburger Menu
+        function toggleMenu() {
+            const menu = document.querySelector('.hamburger-menu');
+            const overlay = document.querySelector('.overlay');
+            menu.classList.toggle('active');
+            overlay.classList.toggle('active');
+        }
+
         // Theme Toggle
         function toggleTheme() {
             document.body.classList.toggle('dark-mode');
@@ -438,17 +501,20 @@
             }
         }
 
+        // Close menu on resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768) {
+                document.querySelector('.hamburger-menu').classList.remove('active');
+                document.querySelector('.overlay').classList.remove('active');
+            }
+        });
+
         // Feedback Form Submission
         document.querySelector('.feedback-form').addEventListener('submit', function(event) {
             event.preventDefault();
             alert('Thank you for your feedback!');
             this.reset();
         });
-
-        function toggleBanner() {
-            const banner = document.getElementById('serviceBanner');
-            banner.style.display = banner.style.display === 'none' ? 'block' : 'none';
-        }
     </script>
 </body>
 </html>
