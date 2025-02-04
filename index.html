@@ -32,6 +32,9 @@
             color: var(--text-light);
             transition: var(--transition);
             line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* Ensure full height */
         }
 
         body.dark-mode {
@@ -90,16 +93,18 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            position: relative;
+            text-align: center;
+            padding: 0 20px;
         }
 
         .logo {
             font-size: 40px;
             font-weight: bold;
             color: var(--primary-color);
-            position: absolute;
-            left: 50%;
-            transform: translateX(-50%);
+            text-align: center;
+            align-items: center;
+            align-self: center;
+            margin-left: 40px;
         }
 
         .menu-toggle {
@@ -107,6 +112,7 @@
             color: var(--text-light);
             z-index: 1001;
             cursor: pointer;
+            display: block; /* Show the hamburger menu */
         }
 
         body.dark-mode .menu-toggle {
@@ -178,7 +184,14 @@
         .overlay.active {
             display: block;
         }
-
+        .sign-in-banner {
+            display: none;
+            background-color: rgb(255, 215, 0);
+            padding: 10px;
+            margin-top: 10px;
+            text-align: center;
+            border-radius: 5px;
+        }
         /* Hero Section */
         .hero {
             background: linear-gradient(135deg, var(--background-light), #f0f0f0);
@@ -215,6 +228,7 @@
         .features {
             background-color: var(--background-light);
             transition: var(--transition);
+            flex: 1; /* Allow section to grow */
         }
 
         body.dark-mode .features {
@@ -323,6 +337,7 @@
             color: inherit;
             padding: 40px 0;
             transition: var(--transition);
+            text-align: center; /* Center content */
         }
 
         body.dark-mode .footer {
@@ -362,30 +377,17 @@
             to { opacity: 1; }
         }
 
-        @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
-        }
-
         /* Responsive Design */
-        @media (min-width: 769px) {
-            .menu-toggle,
-            .hamburger-menu {
-                display: none;
+        @media (min-width: 1700px) {
+            .menu-toggle {
+                display: none; /* Hide on larger screens */
             }
         }
-
-        @media (max-width: 768px) {
-            .navbar .desktop-links {
-                display: none;
-            }
-
             .logo {
                 position: static;
                 transform: none;
                 margin: 0 auto;
             }
-        }
     </style>
 </head>
 <body>
@@ -403,17 +405,19 @@
     </nav>
 
     <!-- Hamburger Menu -->
-    <div class="hamburger-menu">
+    <div class="hamburger-menu" id="hamburgerMenu">
         <nav class="menu-links">
             <a href="services.html">Services</a>
-            <a href="contact.html">Contact</a>
-            <a href="client.html">Client Sign In</a>
-            <a href="worker.html">Worker Sign In</a>
-            <a href="about.html">About</a>
+            <a href="#" onclick="toggleBanner()">Sign In</a>
+            <div class="sign-in-banner" id="serviceBanner">
+                <a href="client.html" style="color: black; text-decoration: none;">Client</a> | 
+                <a href="worker.html" style="color: black; text-decoration: none;">Worker</a>
             </div>
+            <a href="contact.html">Contact</a>
+            <a href="about.html">About</a>
         </nav>
     </div>
-    <div class="overlay" onclick="toggleMenu()"></div>
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
 
     <!-- Hero Section -->
     <section class="hero section-padding">
@@ -468,7 +472,7 @@
 
     <!-- Footer -->
     <footer class="footer section-padding">
-        <div class="container text-center">
+        <div class="container">
             <div class="logo">STUFF</div>
             <div class="links">
                 <a href="about.html">About Us</a>
@@ -480,10 +484,14 @@
     </footer>
 
     <script>
+        function toggleBanner() {
+            const banner = document.getElementById('serviceBanner');
+            banner.style.display = banner.style.display === 'none' ? 'block' : 'none';
+        }
         // Toggle Hamburger Menu
         function toggleMenu() {
-            const menu = document.querySelector('.hamburger-menu');
-            const overlay = document.querySelector('.overlay');
+            const menu = document.getElementById('hamburgerMenu');
+            const overlay = document.getElementById('overlay');
             menu.classList.toggle('active');
             overlay.classList.toggle('active');
         }
@@ -504,8 +512,8 @@
         // Close menu on resize
         window.addEventListener('resize', () => {
             if (window.innerWidth > 768) {
-                document.querySelector('.hamburger-menu').classList.remove('active');
-                document.querySelector('.overlay').classList.remove('active');
+                document.getElementById('hamburgerMenu').classList.remove('active');
+                document.getElementById('overlay').classList.remove('active');
             }
         });
 
