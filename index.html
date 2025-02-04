@@ -153,6 +153,7 @@
             transform: translateY(-5px);
             box-shadow: 0 8px 16px rgba(255, 215, 0, 0.2);
         }
+
         .sign-in-banner {
             display: none;
             background-color: rgb(255, 215, 0);
@@ -161,6 +162,7 @@
             text-align: center;
             border-radius: 5px;
         }
+
         /* Features Section */
         .features {
             background-color: var(--background-light);
@@ -346,7 +348,7 @@
             <div class="nav-links">
                 <a href="about.html">About</a>
                 <a href="contact.html">Contact</a>
-                <a href="service_selection.html">Sign</a>
+                <a href="#" onclick="toggleBanner()">Sign In</a>
                 <div class="sign-in-banner" id="serviceBanner">
                     <a href="client.html" style="color: black; text-decoration: none;">Client</a> | 
                     <a href="worker.html" style="color: black; text-decoration: none;">Worker</a>
@@ -423,27 +425,6 @@
     </footer>
 
     <script>
-        document.querySelector('.feedback-form').addEventListener('submit', function(event) {
-            event.preventDefault(); // Prevent the default form submission
-
-            // Get content from editable fields
-            const name = this.children[0].innerText.trim();
-            const email = this.children[1].innerText.trim();
-            const feedback = this.children[2].innerText.trim();
-
-            if (name && email && feedback) {
-                // Display thank you message
-                document.querySelector('.feedback-thank-you').style.display = 'block';
-                // Clear editable fields
-                Array.from(this.children).forEach(field => field.innerText = '');
-            } else {
-                alert("Please fill in all fields.");
-            }
-        });
-        function toggleBanner() {
-            const banner = document.getElementById('serviceBanner');
-            banner.style.display = banner.style.display === 'none' ? 'block' : 'none';
-        }
         // Theme Toggle
         function toggleTheme() {
             document.body.classList.toggle('dark-mode');
@@ -463,6 +444,11 @@
             alert('Thank you for your feedback!');
             this.reset();
         });
+
+        function toggleBanner() {
+            const banner = document.getElementById('serviceBanner');
+            banner.style.display = banner.style.display === 'none' ? 'block' : 'none';
+        }
     </script>
 </body>
 </html>
