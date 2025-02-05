@@ -1,322 +1,190 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar-TN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Us - STUFF</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>من نحن - STUFF</title>
     <style>
-        /* Global Variables */
-        :root {
-            --primary-color: #ffd700;
-            --background-light: #ffffff;
-            --background-dark: #1a1a1a;
-            --text-light: #333;
-            --text-dark: #f5f5f5;
-            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-            --transition: all 0.3s ease;
-            --border-radius: 12px;
-        }
-
-        /* Reset and Global Styles */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--background-light);
-            color: var(--text-light);
-            transition: var(--transition);
-            line-height: 1.6;
+            margin: 0;
+            background-color: white;
+            font-family: 'Roboto', sans-serif;
         }
 
-        body.dark-mode {
-            background-color: var(--background-dark);
-            color: var(--text-dark);
-        }
-
-        a {
-            text-decoration: none;
-            color: inherit;
-        }
-
-        button {
-            cursor: pointer;
-            border: none;
-            background: none;
-        }
-
-        /* Utility Classes */
-        .container {
-            width: 90%;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .flex {
+        .navbar {
+            background-color: white;
+            padding: 15px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .section-padding {
-            padding: 80px 0;
-        }
-
-        /* Navbar */
-        .navbar {
-            background-color: var(--background-light);
-            box-shadow: var(--shadow);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            transition: var(--transition);
-        }
-
-        body.dark-mode .navbar {
-            background-color: var(--background-dark);
+            border-bottom: 2px solid #ddd;
         }
 
         .navbar .logo {
-            font-size: 40px; /* Larger logo */
+            color: rgb(255, 215, 0);
             font-weight: bold;
-            color: var(--primary-color);
-            cursor: pointer;
+            font-family: 'Helvetica', sans-serif;
+            font-size: 48px;
+            margin-left: 20px;
+            cursor: pointer; /* تغيير المؤشر إلى يد */
         }
 
         .navbar .nav-links {
-            display: flex;
-            gap: 20px;
+            margin-right: 20px;
         }
 
         .navbar a {
-            font-weight: 500;
-            transition: var(--transition);
+            color: black;
+            text-decoration: none; /* إزالة الخط التحتي */
+            margin-right: 20px; /* المسافة بين الروابط */
+            transition: color 0.3s;
         }
 
         .navbar a:hover {
-            color: var(--primary-color);
+            cursor: pointer;
+            color: rgb(255, 215, 0); /* تغيير اللون عند التحويم */
         }
 
-        .theme-toggle {
-            font-size: 20px;
-            color: inherit;
-            transition: var(--transition);
-        }
-
-        .theme-toggle:hover {
-            color: var(--primary-color);
-        }
-
-        /* Content Section */
         .content {
-            padding: 80px 0;
+            padding: 40px;
+            text-align: center;
         }
 
         .title {
-            font-size: clamp(32px, 5vw, 48px);
-            font-weight: bold;
-            margin-bottom: 40px;
-            animation: fadeIn 1.5s ease-in-out;
+            font-size: 36px;
+            margin-bottom: 20px;
         }
 
         .section {
-            margin-bottom: 60px;
+            margin: 40px 0;
             text-align: left;
+            max-width: 800px;
+            margin: 0 auto; /* توسيط القسم */
         }
 
         .section h2 {
-            font-size: clamp(24px, 4vw, 36px);
-            margin-bottom: 20px;
-            color: var(--primary-color);
+            font-size: 28px;
+            margin-bottom: 10px;
+            color: rgb(255, 215, 0);
         }
 
         .section p {
-            font-size: 16px;
-            line-height: 1.8;
-            color: inherit;
+            font-size: 18px;
+            line-height: 1.6;
+            color: #333;
         }
 
-        /* Team Section */
         .team-section {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
             gap: 20px;
         }
 
         .team-member {
-            background-color: var(--background-light);
-            border-radius: var(--border-radius);
+            background-color: #f4f4f4;
+            border-radius: 10px;
             padding: 20px;
             text-align: center;
-            box-shadow: var(--shadow);
-            transition: var(--transition);
-        }
-
-        body.dark-mode .team-member {
-            background-color: #2a2a2a;
+            width: 200px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
 
         .team-member img {
             width: 100%;
-            border-radius: var(--border-radius);
-            margin-bottom: 15px;
-        }
-
-        .team-member h3 {
-            font-size: 20px;
             margin-bottom: 10px;
         }
 
-        .team-member p {
-            font-size: 14px;
-            color: inherit;
-        }
-
-        .team-member:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-        }
-
-        /* Footer */
         .footer {
-            background-color: var(--background-light);
-            color: inherit;
-            padding: 40px 0;
-            transition: var(--transition);
-        }
-
-        body.dark-mode .footer {
-            background-color: var(--background-dark);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-top: 2px solid #ddd;
+            margin-top: 40px;
         }
 
         .footer .logo {
             font-size: 24px;
-            font-weight: bold;
-            color: var(--primary-color);
-            margin-bottom: 20px;
+            color: rgb(255, 215, 0);
         }
 
         .footer .links {
             display: flex;
-            justify-content: center;
             gap: 20px;
-            margin-bottom: 20px;
         }
 
-        .footer a {
-            transition: var(--transition);
+        .footer .links span {
+            cursor: pointer;
+            color: black;
+            font-size: 16px;
+            transition: color 0.3s; /* انتقال سلس للون */
         }
 
-        .footer a:hover {
-            color: var(--primary-color);
+        .footer .links span:hover {
+            color: rgb(255, 215, 0); /* تغيير اللون عند التحويم */
         }
 
         .footer .copyright {
             font-size: 14px;
-            color: #888;
-        }
-
-        /* Animations */
-        @keyframes fadeIn {
-            from { opacity: 0; }
-            to { opacity: 1; }
-        }
-
-        @keyframes slideIn {
-            from { transform: translateY(-50px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
+            color: #555; /* رمادي داكن لحقوق النشر */
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
-    <!-- Navbar -->
-    <nav class="navbar">
-        <div class="container flex">
-            <div class="logo" onclick="location.href='index.html'">STUFF</div>
-            <div class="nav-links">
-                <a href="index.html">Home</a>
-                <a href="signin.html">Sign In</a>
-                <button class="theme-toggle" onclick="toggleTheme()">
-                    <i class="fas fa-moon"></i>
-                </button>
-            </div>
+    <div class="navbar">
+        <div class="logo" onclick="location.href='index.html'">STUFF</div> <!-- رابط للصفحة الرئيسية -->
+        <div class="nav-links">
+            <a href="index.html">الرئيسية</a> <!-- رابط للصفحة الرئيسية -->
+            <a href="signin.html">تسجيل الدخول</a> <!-- رابط لتسجيل الدخول -->
         </div>
-    </nav>
+    </div>
 
-    <!-- Content -->
-    <div class="content container">
-        <h1 class="title text-center">About Us</h1>
+    <div class="content">
+        <h1 class="title">من نحن</h1>
 
-        <!-- Mission Section -->
         <div class="section">
-            <h2>Our Mission</h2>
-            <p>At STUFF, our mission is to provide a seamless platform that connects clients with reliable service providers. We aim to simplify the process of finding and hiring services in your local area.</p>
+            <h2>مهمتنا</h2>
+            <p>في STUFF، مهمتنا هي توفير منصة سلسة تربط العملاء بمقدمي الخدمات الموثوقين. نهدف إلى تبسيط عملية العثور على الخدمات وتوظيفها في منطقتك المحلية.</p>
         </div>
 
-        <!-- Values Section -->
         <div class="section">
-            <h2>Our Values</h2>
-            <p>We believe in integrity, quality, and community. Our commitment to high standards ensures that users can trust the services they receive.</p>
+            <h2>قيمنا</h2>
+            <p>نؤمن بالنزاهة والجودة والمجتمع. التزامنا بمعايير عالية يضمن أن يتمكن المستخدمون من الوثوق بالخدمات التي يتلقونها.</p>
         </div>
 
-        <!-- Team Section -->
         <div class="section">
-            <h2>Meet Our Team</h2>
+            <h2>تعرف على فريقنا</h2>
             <div class="team-section">
                 <div class="team-member">
-                    <img src="images/ceo.png" alt="Hatem Manai">
-                    <h3>Hatem Manai</h3>
-                    <p>Founder & CEO</p>
+                    <img src="images/ceo.png" alt="عضو الفريق">
+                    <h3>حاتم المانع</h3>
+                    <p>المؤسس والرئيس التنفيذي</p>
                 </div>
                 <div class="team-member">
-                    <img src="images/team-member2.jpg" alt="Team Member 2">
-                    <h3>Not available for now</h3>
-                    <p>Operations Manager</p>
+                    <img src="images/team-member2.jpg" alt="عضو الفريق 2">
+                    <h3>غير متوفر حاليًا</h3>
+                    <p>مدير العمليات</p>
                 </div>
                 <div class="team-member">
-                    <img src="images/team-member3.jpg" alt="Team Member 3">
-                    <h3>Not available for now</h3>
-                    <p>Marketing Specialist</p>
+                    <img src="images/team-member3.jpg" alt="عضو الفريق 3">
+                    <h3>غير متوفر حاليًا</h3>
+                    <p>أخصائي التسويق</p>
                 </div>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
-    <footer class="footer text-center">
-        <div class="container">
-            <div class="logo">STUFF</div>
-            <div class="links">
-                <a href="about.html">About Us</a>
-                <a href="services.html">Services</a>
-                <a href="contact.html">Contact Us</a>
-            </div>
-            <div class="copyright">© 2025 STUFF. All rights reserved.</div>
+    <div class="footer">
+        <div class="logo">STUFF</div>
+        <div class="links">
+            <span>من نحن</span>
+            <span>المزيد من الخدمات</span>
+            <span>اتصل بنا</span>
         </div>
-    </footer>
-
-    <script>
-        // Theme Toggle
-        function toggleTheme() {
-            document.body.classList.toggle('dark-mode');
-            const themeIcon = document.querySelector('.theme-toggle i');
-            if (document.body.classList.contains('dark-mode')) {
-                themeIcon.classList.remove('fa-moon');
-                themeIcon.classList.add('fa-sun');
-            } else {
-                themeIcon.classList.remove('fa-sun');
-                themeIcon.classList.add('fa-moon');
-            }
-        }
-    </script>
+        <div class="copyright">© 2025 جميع الحقوق محفوظة</div>
+    </div>
 </body>
 </html>
