@@ -1,154 +1,276 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar-TN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Worker Registration - Stuff</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Courier+New:wght@400&display=swap" rel="stylesheet"> <!-- Added Courier New -->
+    <title>تسجيل العامل - STUFF</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Courier+New:wght@400&display=swap" rel="stylesheet">
     <style>
+        /* Global Styles */
+        :root {
+            --primary-color: #ffcc00; /* لون ذهبي */
+            --secondary-color: #333; /* لون النص الداكن */
+            --background-color: #f9f9f9; /* لون خلفية فاتح */
+            --card-background: white; /* لون خلفية البطاقات */
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* ظل خفيف */
+            --transition: all 0.3s ease; /* انتقالات سلسة */
+        }
+
         body {
             font-family: 'Roboto', sans-serif;
             margin: 0;
-            background-color: #f9f9f9;
+            background-color: var(--background-color);
+            color: var(--secondary-color);
         }
+
+        /* Navbar */
         .navbar {
-            background-color: white;
-            padding: 15px;
+            background-color: var(--card-background);
+            padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 2px solid #ddd;
+            border-bottom: 2px solid #e0e0e0;
+            box-shadow: var(--shadow);
         }
+
         .navbar .logo {
-            color: rgb(255, 215, 0);
+            color: var(--primary-color);
             font-weight: bold;
             font-size: 48px;
-            margin-left: 20px;
+            cursor: pointer;
+            transition: var(--transition);
         }
+
+        .navbar .logo:hover {
+            transform: scale(1.05); /* تكبير الشعار عند التحويم */
+        }
+
         .navbar .nav-links {
-            flex-grow: 0;
+            display: flex;
+            gap: 20px;
         }
+
         .navbar a {
-            color: black;
-            text-decoration: none; /* Remove underline */
-            margin-right: 20px; /* Space between links */
-            transition: border-color 0.3s;
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-size: 16px;
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: var(--transition);
         }
 
         .navbar a:hover {
-            color: rgb(255, 215, 0); /* Change color on hover */
-    border-bottom: 2px solid rgb(255, 215, 0); 
+            color: var(--primary-color);
+            border-bottom: 2px solid var(--primary-color);
         }
+
+        /* Header */
         header {
             text-align: center;
-            padding: 20px;
-            color: black;
+            padding: 40px 20px;
+            background: linear-gradient(135deg, var(--primary-color), #ffdd57);
+            color: white;
         }
+
+        header h1 {
+            font-size: 36px;
+            margin: 0;
+            font-weight: 700;
+        }
+
+        /* Form Container */
         .form-container {
             max-width: 600px;
-            margin: 30px auto;
-            padding: 20px;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            margin: 40px auto;
+            padding: 30px;
+            background: var(--card-background);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
         }
+
+        .form-container:hover {
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15); /* ظل أكبر عند التحويم */
+        }
+
         .form-container h2 {
             text-align: center;
             margin-bottom: 20px;
+            font-size: 28px;
+            color: var(--secondary-color);
         }
+
+        .form-container label {
+            display: block;
+            margin: 10px 0 5px;
+            font-size: 16px;
+            font-weight: 500;
+            color: var(--secondary-color);
+        }
+
         .form-container input,
         .form-container select,
-        .form-container textarea {
+        .form-container textarea,
+        .form-container input[type="file"] {
             width: 100%;
-            padding: 10px;
+            padding: 12px;
             margin: 10px 0;
             border: 1px solid #ced4da;
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 16px;
+            transition: var(--transition);
             box-sizing: border-box;
         }
-        .form-container textarea {
-            font-family: 'Roboto', sans-serif; /* Correct font for textarea */
+
+        .form-container input:focus,
+        .form-container select:focus,
+        .form-container textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 8px rgba(255, 204, 0, 0.3); /* ظل عند التركيز */
         }
+
+        .form-container textarea {
+            font-family: 'Roboto', sans-serif;
+            resize: vertical; /* السماح بتغيير الحجم عموديًا */
+        }
+
         .form-container button {
-            padding: 10px 15px;
-            background-color: #28a745;
-            color: white;
+            padding: 12px 20px;
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
             border: none;
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 16px;
+            font-weight: 500;
             cursor: pointer;
-            transition: background 0.3s, transform 0.3s;
+            transition: var(--transition);
             width: 100%;
         }
+
         .form-container button:hover {
-            background-color: #218838;
-            transform: scale(1.05);
+            background-color: #e6b800; /* لون أغمق عند التحويم */
+            transform: translateY(-2px); /* رفع الزر قليلاً */
         }
+
         .error-message {
-            color: red;
+            color: #dc3545; /* لون أحمر للرسائل الخطأ */
             text-align: center;
             margin: 10px 0;
+            font-size: 14px;
         }
+
+        /* Footer */
         footer {
             text-align: center;
-            margin: 20px 0;
-            color: #888;
+            padding: 20px;
+            background-color: var(--card-background);
+            border-top: 2px solid #e0e0e0;
+            margin-top: 40px;
+            color: #555;
+        }
+
+        footer p {
+            margin: 0;
+            font-size: 14px;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 600px) {
+            .navbar .logo {
+                font-size: 36px;
+            }
+
+            .navbar .nav-links {
+                gap: 10px;
+            }
+
+            .form-container {
+                padding: 20px;
+            }
+
+            header h1 {
+                font-size: 28px;
+            }
         }
     </style>
 </head>
 <body>
 
 <div class="navbar">
-    <div class="logo">STUFF</div>
+    <div class="logo" onclick="location.href='index.html'">STUFF</div> <!-- رابط للصفحة الرئيسية -->
     <div class="nav-links">
-        <a href="about.html">About Us</a>
-        <a href="index.html">Home</a>
+        <a href="about.html">من نحن</a>
+        <a href="index.html">الرئيسية</a>
     </div>
 </div>
 
 <header>
-    <h1>Register as a Worker!</h1>
+    <h1>سجل كعامل!</h1>
 </header>
 
 <div class="form-container">
-    <h2>Worker Information</h2>
+    <h2>معلومات العامل</h2>
     <form id="worker-form">
-        <input type="text" id="first-name" placeholder="First Name" required>
-        <input type="text" id="last-name" placeholder="Last Name" required>
-        <input type="email" id="email" placeholder="Email Address" required>
+        <input type="text" id="first-name" placeholder="الاسم الأول" required>
+        <input type="text" id="last-name" placeholder="الاسم الأخير" required>
+        <input type="email" id="email" placeholder="البريد الإلكتروني" required>
 
-        <label for="role">Select Your Role:</label>
+        <label for="role">اختر دورك:</label>
         <select id="role" required>
-            <option value="" disabled selected>Select a role</option>
-            <option value="plumber">Plumber</option>
-            <option value="electrician">Electrician</option>
-            <option value="gardener">Gardener</option>
-            <option value="housekeeper">Housekeeper</option>
+            <option value="" disabled selected>اختر دورًا</option>
+            <option value="plumber">سباك</option>
+            <option value="electrician">كهربائي</option>
+            <option value="gardener">بستاني</option>
+            <option value="housekeeper">عاملة نظافة</option>
         </select>
 
-        <label for="certification">Attach Certification File:</label>
+        <label for="certification">أرفق ملف الشهادة:</label>
         <input type="file" id="certification" accept=".pdf,.doc,.docx,image/*" required>
 
-        <label for="experience">Previous Experience:</label>
-        <textarea id="experience" placeholder="Describe your previous experience" rows="4" required></textarea>
+        <label for="experience">الخبرة السابقة:</label>
+        <textarea id="experience" placeholder="صف خبرتك السابقة" rows="4" required></textarea>
 
-        <button type="submit">Submit</button>
+        <button type="submit">تقديم</button>
         <div class="error-message" id="error-message"></div>
     </form>
 </div>
 
 <footer>
-    <p>© 2025 Stuff. All rights reserved.</p>
+    <p>© 2025 STUFF. جميع الحقوق محفوظة.</p>
 </footer>
 
 <script>
     document.getElementById('worker-form').addEventListener('submit', function(event) {
-        event.preventDefault(); // Prevent the default form submission
-        
-        // Additional validation can be added here
-        window.location.href = 'index.html'; // Redirect to index.html
+        event.preventDefault(); // منع الإرسال الافتراضي للنموذج
+
+        const firstName = document.getElementById('first-name').value.trim();
+        const lastName = document.getElementById('last-name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const role = document.getElementById('role').value;
+        const certification = document.getElementById('certification').files[0];
+        const experience = document.getElementById('experience').value.trim();
+        const errorMessage = document.getElementById('error-message');
+
+        // تحقق من الحقول الفارغة
+        if (!firstName || !lastName || !email || !role || !certification || !experience) {
+            errorMessage.textContent = 'الرجاء ملء جميع الحقول المطلوبة.';
+            return;
+        }
+
+        // تحقق من صحة البريد الإلكتروني
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            errorMessage.textContent = 'الرجاء إدخال بريد إلكتروني صالح.';
+            return;
+        }
+
+        // إذا كانت جميع البيانات صحيحة
+        errorMessage.textContent = ''; // إزالة رسالة الخطأ
+        alert('تم التسجيل بنجاح!'); // رسالة نجاح
+        window.location.href = 'index.html'; // التوجيه إلى الصفحة الرئيسية
     });
 </script>
 
