@@ -1,108 +1,296 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar-TN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Select Your Service</title>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <title>اختر الخدمة</title>
     <style>
+        /* Global Styles */
+        :root {
+            --primary-color: rgb(255, 215, 0); /* Gold color for accents */
+            --secondary-color: #333; /* Dark color for text */
+            --background-color: #f5f5f5; /* Light background */
+            --card-background: white; /* White for cards and sections */
+            --shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            --transition: all 0.3s ease; /* Smooth transitions */
+        }
+
         body {
-            font-family: 'Roboto', sans-serif;
             margin: 0;
-            padding: 0;
+            background-color: var(--background-color);
+            font-family: 'Roboto', sans-serif;
+            color: var(--secondary-color);
+            line-height: 1.6;
+        }
+
+        /* Navbar */
+        .navbar {
+            background-color: var(--card-background);
+            padding: 15px 20px;
             display: flex;
-            flex-direction: column;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 2px solid #ddd;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar .logo {
+            color: var(--primary-color);
+            font-weight: bold;
+            font-family: 'Helvetica', sans-serif;
+            font-size: clamp(24px, 5vw, 36px); /* Responsive font size */
+            white-space: nowrap; /* Prevent logo text from wrapping */
+        }
+
+        .navbar .nav-links {
+            display: flex;
+            gap: 20px; /* Space between links */
+            align-items: center; /* Center links vertically */
+        }
+
+        .navbar a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-size: clamp(16px, 2vw, 18px); /* Responsive font size */
+            padding: 10px 15px;
+            border-radius: 5px;
+            transition: var(--transition);
+            white-space: nowrap; /* Prevent text wrapping */
+        }
+
+        .navbar a:hover {
+            background-color: var(--primary-color);
+            color: white;
+        }
+
+        /* Hamburger Menu for Mobile */
+        .navbar .menu-icon {
+            display: none; /* Hidden by default */
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--secondary-color);
+            transition: var(--transition);
+        }
+
+        .navbar .menu-icon:hover {
+            color: var(--primary-color); /* Change color on hover */
+        }
+
+        /* Responsive Navbar for Mobile */
+        @media (max-width: 768px) {
+            .navbar .nav-links {
+                display: none; /* Hide links by default on mobile */
+                flex-direction: column;
+                position: absolute;
+                top: 70px; /* Adjust based on navbar height */
+                right: 20px;
+                background-color: var(--card-background);
+                border-radius: 10px;
+                box-shadow: var(--shadow);
+                padding: 20px;
+                width: 200px;
+                opacity: 0; /* Start hidden */
+                transform: translateY(-20px); /* Start slightly above */
+                transition: opacity 0.3s ease, transform 0.3s ease;
+            }
+
+            .navbar .nav-links.active {
+                display: flex; /* Show links when active */
+                opacity: 1; /* Fade in */
+                transform: translateY(0); /* Slide into place */
+            }
+
+            .navbar .menu-icon {
+                display: block; /* Show hamburger icon on mobile */
+            }
+        }
+
+        /* Main Content (Unchanged) */
+        .content {
+            padding: 40px 20px;
+            text-align: center;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .title {
+            font-size: clamp(28px, 6vw, 36px); /* Responsive font size */
+            margin-bottom: 30px;
+            color: var(--secondary-color);
+        }
+
+        .service-selection {
+            margin: 20px 0;
+            font-size: clamp(18px, 3vw, 20px); /* Responsive font size */
+            font-weight: bold;
+        }
+
+        .service-option {
+            margin: 15px 0;
+            display: flex;
             align-items: center;
             justify-content: center;
-            height: 100vh;
-            background: #f0f4f8;
-        }
-        .banner {
-            background: linear-gradient(135deg, #ff6f61, #ffcc5c);
-            color: white;
-            padding: 20px;
-            width: 100%;
-            text-align: center;
-            font-size: 28px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            margin-bottom: 20px;
-        }
-        .logo {
-            width: 100px;
-            animation: bounce 1s infinite alternate;
-        }
-        @keyframes bounce {
-            0% { transform: translateY(0); }
-            100% { transform: translateY(-10px); }
-        }
-        .selection-container {
-            background: white;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-            text-align: center;
-            max-width: 400px;
-            width: 100%;
-        }
-        select, input[type="number"], button {
-            padding: 10px;
-            margin: 10px 0;
-            font-size: 16px;
-            border-radius: 5px;
-            border: 1px solid #ccc;
-            width: calc(100% - 22px);
-            transition: border 0.3s, box-shadow 0.3s;
-        }
-        select:focus, input[type="number"]:focus {
-            border-color: #ff6f61;
-            box-shadow: 0 0 5px rgba(255, 111, 97, 0.5);
-        }
-        button {
-            background-color: #ff6f61;
-            color: white;
-            border: none;
+            background-color: var(--card-background);
+            padding: 15px;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
             cursor: pointer;
+            border: 2px solid transparent;
         }
-        button:hover {
-            background-color: #ffcc5c;
-            transform: scale(1.05);
+
+        .service-option.selected {
+            border-color: var(--primary-color);
+            background-color: rgba(255, 215, 0, 0.1); /* Light gold background for selected state */
+        }
+
+        .service-option:hover {
+            transform: translateY(-5px); /* Lift effect on hover */
+        }
+
+        .location-input {
+            margin-top: 20px;
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #e0e0e0;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .location-input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+
+        .button-container {
+            margin-top: 30px;
+        }
+
+        .proceed-button {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            border: none;
+            border-radius: 10px;
+            padding: 15px 30px;
+            font-size: clamp(16px, 3vw, 20px); /* Responsive font size */
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .proceed-button:hover {
+            background-color: darkgoldenrod;
+            transform: translateY(-3px); /* Lift effect on hover */
+        }
+
+        /* Footer */
+        .footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px;
+            background-color: var(--card-background);
+            border-top: 2px solid #ddd;
+            margin-top: 40px;
+        }
+
+        .footer .logo {
+            font-size: clamp(18px, 4vw, 24px); /* Responsive font size */
+            color: var(--primary-color);
+        }
+
+        .footer .copyright {
+            font-size: clamp(12px, 2vw, 14px); /* Responsive font size */
+            color: #555;
         }
     </style>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        // JavaScript to handle service selection
+        document.addEventListener('DOMContentLoaded', function () {
+            const serviceOptions = document.querySelectorAll('.service-option');
+            let selectedService = null;
+
+            serviceOptions.forEach(option => {
+                option.addEventListener('click', function () {
+                    // Remove selected class from all options
+                    serviceOptions.forEach(opt => opt.classList.remove('selected'));
+
+                    // Add selected class to the clicked option
+                    option.classList.add('selected');
+                    selectedService = option.getAttribute('data-value');
+
+                    // Store the selected service in localStorage
+                    localStorage.setItem('selectedService', selectedService);
+                    console.log('تم اختيار الخدمة:', selectedService);
+                });
+            });
+
+            // Proceed button functionality
+            document.querySelector('.proceed-button').addEventListener('click', function () {
+                if (selectedService) {
+                    window.location.href = 'searching.html';
+                } else {
+                    alert('الرجاء اختيار خدمة.');
+                }
+            });
+
+            // Hamburger menu functionality
+            const menuIcon = document.querySelector('.navbar .menu-icon');
+            const navLinks = document.querySelector('.navbar .nav-links');
+
+            menuIcon.addEventListener('click', function () {
+                navLinks.classList.toggle('active'); // Toggle mobile menu
+            });
+        });
+    </script>
 </head>
 <body>
+    <!-- Navbar -->
+    <div class="navbar">
+        <div class="logo">STUFF</div>
+        <div class="nav-links">
+            <a href="index.html">الرئيسية</a>
+            <a href="#about">من نحن</a>
+            <a href="#signin">تسجيل الدخول</a>
+        </div>
+        <div class="menu-icon">&#9776;</div> <!-- Hamburger icon -->
+    </div>
 
-<div class="banner">Welcome to Our Service Selection</div>
+    <!-- Main Content -->
+    <div class="content">
+        <h1 class="title">مرحبًا بكم في اختيار الخدمة</h1>
+        <p class="service-selection">اختر الخدمة:</p>
+        <div class="service-option" data-value="سباكة">
+            <span>سباكة</span>
+        </div>
+        <div class="service-option" data-value="تنظيف المنازل">
+            <span>تنظيف المنازل</span>
+        </div>
+        <div class="service-option" data-value="بستنة">
+            <span>بستنة</span>
+        </div>
+        <div class="service-option" data-value="أعمال كهربائية">
+            <span>أعمال كهربائية</span>
+        </div>
+        
+        <label for="location" style="margin-top: 20px; display: block;"></label>
+        <input type="text" id="location" class="location-input" placeholder="موقعك" required>
+        <label for="number" style="margin-top: 5px; display: block;"></label>
+        <input type="text" id="number" class="location-input" placeholder="رقم هاتفك" required>
 
-<div class="selection-container">
-    <h2>Select Your Service</h2>
-    <label for="service-select">Choose a service:</label>
-    <select id="service-select">
-        <option value="plumbing">Plumbing</option>
-        <option value="housekeeping">Housekeeping</option>
-        <option value="gardening">Gardening</option>
-        <option value="electrical">Electrical Work</option>
-    </select>
-    
-    <h2>Select Your Price Range</h2>
-    <label for="price-input">Enter your price:</label>
-    <input type="number" id="price-input" placeholder="Enter your price" />
+        <div class="button-container">
+            <button class="proceed-button">انتقل إلى التحميل</button>
+        </div>
+    </div>
 
-    <button id="submit-button">Proceed to Loading</button>
-</div>
-
-<script>
-    document.getElementById('submit-button').addEventListener('click', function() {
-        const service = document.getElementById('service-select').value;
-        const price = document.getElementById('price-input').value;
-
-        if (service && price) {
-            window.location.href = `loading.html?service=${service}&price=${price}`; // Redirect to search results page
-        } else {
-            alert('Please fill in all fields before proceeding.');
-        }
-    });
-</script>
-
+    <!-- Footer -->
+    <div class="footer">
+        <div class="logo">STUFF</div>
+        <div class="copyright">© 2025 جميع الحقوق محفوظة</div>
+    </div>
 </body>
 </html>
