@@ -1,29 +1,41 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar-TN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Price Proposal</title>
+    <title>عرض السعر</title>
     <style>
-        body {
-            margin: 0;
-            background-color: #f0f4f8; /* Soft background color for contrast */
-            font-family: 'Roboto', sans-serif;
-            color: #333;
+        /* Global Styles */
+        :root {
+            --primary-color: #ffcc00; /* لون ذهبي */
+            --secondary-color: #333; /* لون النص الداكن */
+            --background-color: #f0f4f8; /* لون خلفية فاتح */
+            --card-background: white; /* لون خلفية البطاقات */
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* ظل خفيف */
+            --transition: all 0.3s ease; /* انتقالات سلسة */
         }
 
+        body {
+            margin: 0;
+            background-color: var(--background-color);
+            font-family: 'Roboto', sans-serif;
+            color: var(--secondary-color);
+            line-height: 1.6;
+        }
+
+        /* Navbar */
         .navbar {
-            background-color: #ffffff;
+            background-color: var(--card-background);
             padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             border-bottom: 2px solid #e0e0e0;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            box-shadow: var(--shadow);
         }
 
         .navbar .logo {
-            color: #ffcc00;
+            color: var(--primary-color);
             font-weight: bold;
             font-size: 36px;
             letter-spacing: 1px;
@@ -32,38 +44,38 @@
         .navbar .nav-links {
             display: flex;
             gap: 20px;
-            flex-grow: 0;
         }
 
         .navbar a {
-            color: #333;
+            color: var(--secondary-color);
             text-decoration: none;
             font-size: 16px;
             padding: 10px 15px;
             border-radius: 5px;
-            transition: background-color 0.3s, color 0.3s;
+            transition: var(--transition);
         }
 
         .navbar a:hover {
-            background-color: #ffcc00;
+            background-color: var(--primary-color);
             color: white;
         }
 
+        /* Main Content */
         .content {
             padding: 40px;
             text-align: center;
-            max-width: 600px; 
-            margin: 40px auto; 
-            background: white; 
-            border-radius: 10px; 
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 40px auto;
+            background: var(--card-background);
+            border-radius: 10px;
+            box-shadow: var(--shadow);
         }
 
         .title {
             font-size: 30px;
             margin-bottom: 20px;
             font-weight: 700;
-            color: #000000; /* Accent color for titles */
+            color: var(--secondary-color);
         }
 
         .worker-info {
@@ -73,7 +85,7 @@
             padding: 20px;
             border: 1px solid #e0e0e0;
             border-radius: 8px;
-            background: #f9f9f9; 
+            background: #f9f9f9;
         }
 
         .price-section {
@@ -85,15 +97,15 @@
 
         .price {
             font-size: 24px;
-            color: #28a745; 
+            color: #28a745; /* لون أخضر للسعر */
             font-weight: bold;
         }
 
         .button-container {
             margin-top: 30px;
             display: flex;
-            justify-content: space-between; 
-            align-items: center; 
+            justify-content: space-between;
+            align-items: center;
         }
 
         .negotiation {
@@ -111,38 +123,39 @@
             padding: 10px 20px;
             font-size: 16px;
             cursor: pointer;
-            transition: background-color 0.3s, transform 0.2s;
-            flex: 1; /* Equal width for buttons */
-            margin: 0 5px; /* Equal spacing between buttons */
+            transition: var(--transition);
+            flex: 1;
+            margin: 0 5px;
         }
 
         .negotiate-button:hover, .submit-button:hover, .search-button:hover {
             background-color: #0056b3;
-            transform: translateY(-2px); 
+            transform: translateY(-2px);
         }
 
         .input-negotiation {
-            display: none; /* Hidden by default */
+            display: none; /* مخفي بشكل افتراضي */
             padding: 10px;
             border: 1px solid #e0e0e0;
             border-radius: 5px;
             font-size: 16px;
             width: 100%;
             margin-top: 10px;
-            transition: border-color 0.3s;
+            transition: var(--transition);
         }
 
         .input-negotiation:focus {
-            border-color: #ffcc00;
+            border-color: var(--primary-color);
             outline: none;
         }
 
+        /* Footer */
         .footer {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 20px;
-            background-color: #ffffff;
+            background-color: var(--card-background);
             border-top: 2px solid #e0e0e0;
             margin-top: 40px;
             box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
@@ -150,7 +163,7 @@
 
         .footer .logo {
             font-size: 24px;
-            color: #ffcc00;
+            color: var(--primary-color);
         }
 
         .footer .copyright {
@@ -158,6 +171,7 @@
             color: #555;
         }
 
+        /* Responsive Design */
         @media (max-width: 600px) {
             .navbar .nav-links {
                 flex-direction: column;
@@ -169,15 +183,15 @@
             }
 
             .button-container {
-                flex-direction: column; 
+                flex-direction: column;
             }
 
             .negotiation {
-                flex-direction: column; /* Stack on small screens */
+                flex-direction: column;
             }
 
             .negotiate-button, .submit-button, .search-button {
-                margin: 5px 0; /* Stack buttons */
+                margin: 5px 0;
             }
         }
     </style>
@@ -187,46 +201,46 @@
     <div class="navbar">
         <div class="logo">STUFF</div>
         <div class="nav-links">
-            <a href="index.html">Home</a>
-            <a href="about.html">About Us</a>
-            <a href="#signin">Sign In</a>
+            <a href="index.html">الرئيسية</a>
+            <a href="about.html">من نحن</a>
+            <a href="#signin">تسجيل الدخول</a>
         </div>
     </div>
 
     <div class="content">
-        <h1 class="title">Price Proposal</h1>
+        <h1 class="title">عرض السعر</h1>
         
         <div class="worker-info">
-            <h2>Service: <span id="selected-service"></span></h2>
-            <p>Name: <span id="worker-name"></span></p>
-            <p>Profession: <span id="worker-profession"></span></p>
+            <h2>الخدمة: <span id="selected-service"></span></h2>
+            <p>الاسم: <span id="worker-name"></span></p>
+            <p>المهنة: <span id="worker-profession"></span></p>
             <div class="price-section">
-                <span class="price" id="proposed-price">$100</span> 
+                <span class="price" id="proposed-price">100 دينار</span> 
             </div>
         </div>
 
         <div class="button-container">
-            <a href="payment.html"
-                ><button class="submit-button" onclick="submitProposal()">Submit Proposal</button>
+            <a href="payment.html">
+                <button class="submit-button" onclick="submitProposal()">تقديم العرض</button>
             </a>
-            <button class="negotiate-button" onclick="toggleNegotiationInput()">Negotiate</button>
-            <button class="search-button" onclick="searchNewWorker()">Search for other's</button>
+            <button class="negotiate-button" onclick="toggleNegotiationInput()">تفاوض</button>
+            <button class="search-button" onclick="searchNewWorker()">ابحث عن آخرين</button>
         </div>
         
-        <input type="text" class="input-negotiation" id="negotiation-input" placeholder="Enter your proposed price">
+        <input type="text" class="input-negotiation" id="negotiation-input" placeholder="أدخل السعر المقترح">
     </div>
 
     <div class="footer">
         <div class="logo">STUFF</div>
-        <div class="copyright">© 2025 All Rights Reserved</div>
+        <div class="copyright">© 2025 جميع الحقوق محفوظة</div>
     </div>
 
     <script>
         const workerData = {
-            "Plumbing": { name: "John Doe", profession: "Plumber" },
-            "Housekeeping": { name: "Jane Smith", profession: "Housekeeper" },
-            "Gardening": { name: "Mark Green", profession: "Gardener" },
-            "Electrical Work": { name: "Emily White", profession: "Electrician" }
+            "سباكة": { name: "محمد علي", profession: "سباك", price: 100 },
+            "تنظيف المنازل": { name: "فاطمة الزهراء", profession: "عاملة نظافة", price: 80 },
+            "بستنة": { name: "خالد الأخضر", profession: "بستاني", price: 120 },
+            "أعمال كهربائية": { name: "أميرة البيض", profession: "كهربائية", price: 150 }
         };
 
         const selectedService = localStorage.getItem('selectedService');
@@ -237,26 +251,31 @@
             if (worker) {
                 document.getElementById('worker-name').innerText = worker.name;
                 document.getElementById('worker-profession').innerText = worker.profession;
+                document.getElementById('proposed-price').innerText = `${worker.price} دينار`;
             } else {
-                document.getElementById('worker-name').innerText = "Worker not found.";
+                document.getElementById('worker-name').innerText = "العامل غير موجود.";
                 document.getElementById('worker-profession').innerText = "";
             }
         } else {
-            document.getElementById('selected-service').innerText = "No service selected.";
-            document.getElementById('worker-name').innerText = "N/A";
-            document.getElementById('worker-profession').innerText = "N/A";
+            document.getElementById('selected-service').innerText = "لم يتم اختيار خدمة.";
+            document.getElementById('worker-name').innerText = "غير متوفر";
+            document.getElementById('worker-profession').innerText = "غير متوفر";
         }
 
         function toggleNegotiationInput() {
             const input = document.getElementById('negotiation-input');
             input.style.display = input.style.display === 'none' || input.style.display === '' ? 'block' : 'none';
-            input.focus(); // Focus the input when shown
+            input.focus(); // التركيز على حقل الإدخال عند الظهور
         }
 
         function submitProposal() {
-            const proposedPrice = document.querySelector('.input-negotiation').value;
-            alert('Your proposed price: $' + proposedPrice);
-            // Here you would typically send this data to a server
+            const proposedPrice = document.getElementById('negotiation-input').value;
+            if (proposedPrice) {
+                alert(`السعر المقترح: ${proposedPrice} دينار`);
+                // هنا يمكنك إرسال البيانات إلى الخادم
+            } else {
+                alert("الرجاء إدخال سعر مقترح.");
+            }
         }
 
         function searchNewWorker() {
