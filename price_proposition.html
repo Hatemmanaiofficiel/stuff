@@ -172,28 +172,33 @@
         }
 
         /* Responsive Design */
-        @media (max-width: 600px) {
+        @media (max-width: 768px) {
             .navbar .nav-links {
+                display: none; /* Hide links by default on mobile */
                 flex-direction: column;
-                align-items: center;
-            }
-
-            .content {
+                position: absolute;
+                top: 70px; /* Adjust based on navbar height */
+                right: 20px;
+                background-color: var(--card-background);
+                border-radius: 10px;
+                box-shadow: var(--shadow);
                 padding: 20px;
+                width: 200px;
+                opacity: 0; /* Start hidden */
+                transform: translateY(-20px); /* Start slightly above */
+                transition: opacity 0.3s ease, transform 0.3s ease;
             }
 
-            .button-container {
-                flex-direction: column;
+            .navbar .nav-links.active {
+                display: flex; /* Show links when active */
+                opacity: 1; /* Fade in */
+                transform: translateY(0); /* Slide into place */
             }
 
-            .negotiation {
-                flex-direction: column;
-            }
-
-            .negotiate-button, .submit-button, .search-button {
-                margin: 5px 0;
-            }
-        }
+            .navbar .menu-icon {
+                display: block; /* Show hamburger icon on mobile */
+                font-size: large;
+            }}
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
 </head>
@@ -205,6 +210,7 @@
             <a href="about.html">من نحن</a>
             <a href="#signin">تسجيل الدخول</a>
         </div>
+        <div class="menu-icon">&#9776;</div> <!-- Hamburger icon -->
     </div>
 
     <div class="content">
