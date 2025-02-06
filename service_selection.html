@@ -32,18 +32,23 @@
             align-items: center;
             border-bottom: 2px solid #ddd;
             box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         .navbar .logo {
             color: var(--primary-color);
             font-weight: bold;
             font-family: 'Helvetica', sans-serif;
-            font-size: clamp(24px, 5vw, 48px); /* Responsive font size */
+            font-size: clamp(24px, 5vw, 36px); /* Responsive font size */
+            white-space: nowrap; /* Prevent logo text from wrapping */
         }
 
         .navbar .nav-links {
             display: flex;
-            gap: 20px;
+            gap: 20px; /* Space between links */
+            align-items: center; /* Center links vertically */
         }
 
         .navbar a {
@@ -53,6 +58,7 @@
             padding: 10px 15px;
             border-radius: 5px;
             transition: var(--transition);
+            white-space: nowrap; /* Prevent text wrapping */
         }
 
         .navbar a:hover {
@@ -60,7 +66,49 @@
             color: white;
         }
 
-        /* Main Content */
+        /* Hamburger Menu for Mobile */
+        .navbar .menu-icon {
+            display: none; /* Hidden by default */
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--secondary-color);
+            transition: var(--transition);
+        }
+
+        .navbar .menu-icon:hover {
+            color: var(--primary-color); /* Change color on hover */
+        }
+
+        /* Responsive Navbar for Mobile */
+        @media (max-width: 768px) {
+            .navbar .nav-links {
+                display: none; /* Hide links by default on mobile */
+                flex-direction: column;
+                position: absolute;
+                top: 70px; /* Adjust based on navbar height */
+                right: 20px;
+                background-color: var(--card-background);
+                border-radius: 10px;
+                box-shadow: var(--shadow);
+                padding: 20px;
+                width: 200px;
+                opacity: 0; /* Start hidden */
+                transform: translateY(-20px); /* Start slightly above */
+                transition: opacity 0.3s ease, transform 0.3s ease;
+            }
+
+            .navbar .nav-links.active {
+                display: flex; /* Show links when active */
+                opacity: 1; /* Fade in */
+                transform: translateY(0); /* Slide into place */
+            }
+
+            .navbar .menu-icon {
+                display: block; /* Show hamburger icon on mobile */
+            }
+        }
+
+        /* Main Content (Unchanged) */
         .content {
             padding: 40px 20px;
             text-align: center;
@@ -158,23 +206,6 @@
             font-size: clamp(12px, 2vw, 14px); /* Responsive font size */
             color: #555;
         }
-
-        /* Responsive Design */
-        @media (max-width: 600px) {
-            .navbar .nav-links {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .service-option {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-
-            .content {
-                padding: 20px;
-            }
-        }
     </style>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
     <script>
@@ -206,10 +237,19 @@
                     alert('الرجاء اختيار خدمة.');
                 }
             });
+
+            // Hamburger menu functionality
+            const menuIcon = document.querySelector('.navbar .menu-icon');
+            const navLinks = document.querySelector('.navbar .nav-links');
+
+            menuIcon.addEventListener('click', function () {
+                navLinks.classList.toggle('active'); // Toggle mobile menu
+            });
         });
     </script>
 </head>
 <body>
+    <!-- Navbar -->
     <div class="navbar">
         <div class="logo">STUFF</div>
         <div class="nav-links">
@@ -217,8 +257,10 @@
             <a href="#about">من نحن</a>
             <a href="#signin">تسجيل الدخول</a>
         </div>
+        <div class="menu-icon">&#9776;</div> <!-- Hamburger icon -->
     </div>
 
+    <!-- Main Content -->
     <div class="content">
         <h1 class="title">مرحبًا بكم في اختيار الخدمة</h1>
         <p class="service-selection">اختر الخدمة:</p>
@@ -245,6 +287,7 @@
         </div>
     </div>
 
+    <!-- Footer -->
     <div class="footer">
         <div class="logo">STUFF</div>
         <div class="copyright">© 2025 جميع الحقوق محفوظة</div>
