@@ -3,22 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>عرض السعر</title>
+    <title>عرض السعر - STUFF</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
     <style>
         /* Global Styles */
         :root {
-            --primary-color: #ffcc00; /* لون ذهبي */
-            --secondary-color: #333; /* لون النص الداكن */
-            --background-color: #f0f4f8; /* لون خلفية فاتح */
-            --card-background: white; /* لون خلفية البطاقات */
-            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* ظل خفيف */
-            --transition: all 0.3s ease; /* انتقالات سلسة */
+            --primary-color: rgb(255, 215, 0);
+            --secondary-color: #333;
+            --background-color: #f5f5f5;
+            --card-background: white;
+            --shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
         }
 
         body {
             margin: 0;
             background-color: var(--background-color);
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Poppins', sans-serif;
             color: var(--secondary-color);
             line-height: 1.6;
         }
@@ -32,18 +34,28 @@
             align-items: center;
             border-bottom: 2px solid #e0e0e0;
             box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
         }
 
         .navbar .logo {
             color: var(--primary-color);
             font-weight: bold;
-            font-size: 36px;
-            letter-spacing: 1px;
+            font-size: 28px;
+            font-family: 'Roboto', sans-serif;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .navbar .logo:hover {
+            transform: scale(1.05);
         }
 
         .navbar .nav-links {
             display: flex;
-            gap: 20px;
+            gap: 25px;
+            align-items: center;
         }
 
         .navbar a {
@@ -53,11 +65,66 @@
             padding: 10px 15px;
             border-radius: 5px;
             transition: var(--transition);
+            position: relative;
+        }
+
+        .navbar a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            bottom: 0;
+            left: 0;
+            transition: var(--transition);
+        }
+
+        .navbar a:hover::after {
+            width: 100%;
         }
 
         .navbar a:hover {
-            background-color: var(--primary-color);
-            color: white;
+            color: var(--primary-color);
+        }
+
+        .navbar .menu-icon {
+            display: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: var(--secondary-color);
+            transition: var(--transition);
+        }
+
+        .navbar .menu-icon:hover {
+            color: var(--primary-color);
+        }
+
+        @media (max-width: 768px) {
+            .navbar .nav-links {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 70px;
+                right: 20px;
+                background-color: var(--card-background);
+                border-radius: 10px;
+                box-shadow: var(--shadow);
+                padding: 20px;
+                width: 200px;
+                opacity: 0;
+                transform: translateY(-20px);
+                transition: opacity 0.3s ease, transform 0.3s ease;
+            }
+
+            .navbar .nav-links.active {
+                display: flex;
+                opacity: 1;
+                transform: translateY(0);
+            }
+
+            .navbar .menu-icon {
+                display: block;
+            }
         }
 
         /* Main Content */
@@ -69,13 +136,24 @@
             background: var(--card-background);
             border-radius: 10px;
             box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .content:hover {
+            box-shadow: 0 6px 30px rgba(0, 0, 0, 0.15);
         }
 
         .title {
-            font-size: 30px;
+            font-size: 36px;
             margin-bottom: 20px;
             font-weight: 700;
             color: var(--secondary-color);
+            animation: fadeIn 1s ease-in-out;
+        }
+
+        @keyframes fadeIn {
+            0% { opacity: 0; transform: translateY(-20px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         .worker-info {
@@ -97,8 +175,31 @@
 
         .price {
             font-size: 24px;
-            color: #28a745; /* لون أخضر للسعر */
+            color: #28a745;
             font-weight: bold;
+        }
+
+        .textarea-container {
+            margin-top: 20px;
+            display: none;
+            border-radius: 8px;
+        }
+
+        .textarea-container textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 16px;
+            resize: vertical;
+            transition: var(--transition);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .textarea-container textarea:focus {
+            border-color: var(--primary-color);
+            outline: none;
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
         }
 
         .button-container {
@@ -106,38 +207,41 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            gap: 10px;
         }
 
-        .negotiation {
-            margin-top: 20px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .negotiate-button, .submit-button, .search-button {
-            background-color: #007bff;
-            color: white;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            font-size: 16px;
+        .button {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            border: none; /* Ensure no border */
+            border-radius: 8px;
+            padding: 12px 0; /* Adjust padding for vertical alignment */
+            font-size: 16px; /* You can change this as needed */
             cursor: pointer;
             transition: var(--transition);
-            flex: 1;
-            margin: 0 5px;
+            flex: 1; /* Allow buttons to grow equally */
+            width: 150px; /* Set a fixed width */
+            height: 50px; /* Set a fixed height */
+            display: flex; /* Enable flexbox for centering */
+            justify-content: center; /* Center text horizontally */
+            align-items: center; /* Center text vertically */
+            text-decoration: none; /* Remove underline from text */
         }
 
-        .negotiate-button:hover, .submit-button:hover, .search-button:hover {
-            background-color: #0056b3;
-            transform: translateY(-2px);
+        .button:focus {
+            outline: none; /* Remove focus outline */
+        }
+
+        .button:hover {
+            background-color: darkgoldenrod;
+            transform: translateY(-3px);
         }
 
         .input-negotiation {
-            display: none; /* مخفي بشكل افتراضي */
-            padding: 10px;
+            display: none;
+            padding: 12px;
             border: 1px solid #e0e0e0;
-            border-radius: 5px;
+            border-radius: 8px;
             font-size: 16px;
             width: 100%;
             margin-top: 10px;
@@ -147,18 +251,17 @@
         .input-negotiation:focus {
             border-color: var(--primary-color);
             outline: none;
+            box-shadow: 0 0 8px rgba(255, 215, 0, 0.3);
         }
 
         /* Footer */
         .footer {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            text-align: center;
             padding: 20px;
             background-color: var(--card-background);
             border-top: 2px solid #e0e0e0;
             margin-top: 40px;
-            box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.1);
+            color: #555;
         }
 
         .footer .logo {
@@ -168,41 +271,85 @@
 
         .footer .copyright {
             font-size: 14px;
-            color: #555;
         }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .navbar .nav-links {
-                display: none; /* Hide links by default on mobile */
-                flex-direction: column;
-                position: absolute;
-                top: 70px; /* Adjust based on navbar height */
-                right: 20px;
-                background-color: var(--card-background);
-                border-radius: 10px;
-                box-shadow: var(--shadow);
-                padding: 20px;
-                width: 200px;
-                opacity: 0; /* Start hidden */
-                transform: translateY(-20px); /* Start slightly above */
-                transition: opacity 0.3s ease, transform 0.3s ease;
-            }
-
-            .navbar .nav-links.active {
-                display: flex; /* Show links when active */
-                opacity: 1; /* Fade in */
-                transform: translateY(0); /* Slide into place */
-            }
-
-            .navbar .menu-icon {
-                display: block; /* Show hamburger icon on mobile */
-                font-size: large;
-            }}
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const workerData = {
+                "سباكة": { name: "محمد علي", profession: "سباك", price: 100 },
+                "تنظيف المنازل": { name: "فاطمة الزهراء", profession: "عاملة نظافة", price: 80 },
+                "بستنة": { name: "خالد الأخضر", profession: "بستاني", price: 120 },
+                "أعمال كهربائية": { name: "أميرة البيض", profession: "كهربائية", price: 150 }
+            };
+
+            const selectedService = localStorage.getItem('selectedService');
+            if (selectedService) {
+                document.getElementById('selected-service').innerText = selectedService;
+
+                const worker = workerData[selectedService];
+                if (worker) {
+                    document.getElementById('worker-name').innerText = worker.name;
+                    document.getElementById('worker-profession').innerText = worker.profession;
+                    document.getElementById('proposed-price').innerText = `${worker.price} دينار`;
+                } else {
+                    document.getElementById('worker-name').innerText = "العامل غير موجود.";
+                    document.getElementById('worker-profession').innerText = "";
+                }
+            } else {
+                document.getElementById('selected-service').innerText = "لم يتم اختيار خدمة.";
+                document.getElementById('worker-name').innerText = "غير متوفر";
+                document.getElementById('worker-profession').innerText = "غير متوفر";
+            }
+
+            // Toggle textarea for service prescription
+            document.querySelector('.add-prescription-button').addEventListener('click', function () {
+                const textareaContainer = document.querySelector('.textarea-container');
+                textareaContainer.style.display = textareaContainer.style.display === 'none' || textareaContainer.style.display === '' ? 'block' : 'none';
+            });
+
+            // Toggle negotiation input
+            document.querySelector('.negotiate-button').addEventListener('click', function () {
+                const input = document.getElementById('negotiation-input');
+                input.style.display = input.style.display === 'none' || input.style.display === '' ? 'block' : 'none';
+                input.focus();
+            });
+
+            // Submit proposal
+            document.querySelector('.submit-button').addEventListener('click', function () {
+                const proposedPrice = document.getElementById('negotiation-input').value;
+                const additionalInfo = document.getElementById('additional-info').value;
+
+                if (!/^\d+$/.test(proposedPrice)) {
+                    alert("الرجاء إدخال سعر صحيح (أرقام فقط).");
+                    return;
+                }
+
+                if (proposedPrice && additionalInfo) {
+                    alert(`تم تقديم العرض بنجاح!\nالسعر المقترح: ${proposedPrice} دينار\nالتفاصيل: ${additionalInfo}`);
+                } else {
+                    alert("الرجاء إدخال السعر المقترح وتفاصيل العمل.");
+                }
+            });
+
+            // Search for new worker
+            document.querySelector('.search-button').addEventListener('click', function () {
+                window.location.href = 'service_selection.html';
+            });
+
+            // Restrict negotiation input to numbers only
+            document.getElementById('negotiation-input').addEventListener('input', function (e) {
+                e.target.value = e.target.value.replace(/[^0-9]/g, '');
+            });
+
+            // Hamburger menu functionality
+            document.querySelector('.navbar .menu-icon').addEventListener('click', function () {
+                document.querySelector('.navbar .nav-links').classList.toggle('active');
+            });
+        });
+    </script>
 </head>
 <body>
+    <!-- Navbar -->
     <div class="navbar">
         <div class="logo">STUFF</div>
         <div class="nav-links">
@@ -210,9 +357,10 @@
             <a href="about.html">من نحن</a>
             <a href="#signin">تسجيل الدخول</a>
         </div>
-        <div class="menu-icon">&#9776;</div> <!-- Hamburger icon -->
+        <div class="menu-icon">&#9776;</div>
     </div>
 
+    <!-- Main Content -->
     <div class="content">
         <h1 class="title">عرض السعر</h1>
         
@@ -225,68 +373,29 @@
             </div>
         </div>
 
+        <!-- Textarea for Additional Information -->
+        <div class="textarea-container">
+            <textarea id="additional-info" placeholder="ما الذي تريد إصلاحه أو ما الذي يجب على العامل القيام به؟"></textarea>
+        </div>
+
+        <!-- Buttons -->
         <div class="button-container">
+            <button class="button add-prescription-button">صف الخدمة</button>
             <a href="payment.html">
-                <button class="submit-button" onclick="submitProposal()">تقديم العرض</button>
+                <button class="button submit-button">تقديم العرض</button>
             </a>
-            <button class="negotiate-button" onclick="toggleNegotiationInput()">تفاوض</button>
-            <button class="search-button" onclick="searchNewWorker()">ابحث عن آخرين</button>
+            <button class="button negotiate-button">تفاوض</button>
+            <button class="button search-button">ابحث عن آخرين</button>
         </div>
         
-        <input type="text" class="input-negotiation" id="negotiation-input" placeholder="أدخل السعر المقترح">
+        <!-- Negotiation Input -->
+        <input type="text" class="input-negotiation" id="negotiation-input" placeholder="أدخل السعر المقترح (أرقام فقط)">
     </div>
 
+    <!-- Footer -->
     <div class="footer">
         <div class="logo">STUFF</div>
         <div class="copyright">© 2025 جميع الحقوق محفوظة</div>
     </div>
-
-    <script>
-        const workerData = {
-            "سباكة": { name: "محمد علي", profession: "سباك", price: 100 },
-            "تنظيف المنازل": { name: "فاطمة الزهراء", profession: "عاملة نظافة", price: 80 },
-            "بستنة": { name: "خالد الأخضر", profession: "بستاني", price: 120 },
-            "أعمال كهربائية": { name: "أميرة البيض", profession: "كهربائية", price: 150 }
-        };
-
-        const selectedService = localStorage.getItem('selectedService');
-        if (selectedService) {
-            document.getElementById('selected-service').innerText = selectedService;
-
-            const worker = workerData[selectedService];
-            if (worker) {
-                document.getElementById('worker-name').innerText = worker.name;
-                document.getElementById('worker-profession').innerText = worker.profession;
-                document.getElementById('proposed-price').innerText = `${worker.price} دينار`;
-            } else {
-                document.getElementById('worker-name').innerText = "العامل غير موجود.";
-                document.getElementById('worker-profession').innerText = "";
-            }
-        } else {
-            document.getElementById('selected-service').innerText = "لم يتم اختيار خدمة.";
-            document.getElementById('worker-name').innerText = "غير متوفر";
-            document.getElementById('worker-profession').innerText = "غير متوفر";
-        }
-
-        function toggleNegotiationInput() {
-            const input = document.getElementById('negotiation-input');
-            input.style.display = input.style.display === 'none' || input.style.display === '' ? 'block' : 'none';
-            input.focus(); // التركيز على حقل الإدخال عند الظهور
-        }
-
-        function submitProposal() {
-            const proposedPrice = document.getElementById('negotiation-input').value;
-            if (proposedPrice) {
-                alert(`السعر المقترح: ${proposedPrice} دينار`);
-                // هنا يمكنك إرسال البيانات إلى الخادم
-            } else {
-                alert("الرجاء إدخال سعر مقترح.");
-            }
-        }
-
-        function searchNewWorker() {
-            window.location.href = 'service_selection.html';
-        }
-    </script>
 </body>
 </html>
